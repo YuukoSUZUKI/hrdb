@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  skill_category_name: MyString
+  sort_order: 1
+
+two:
+  skill_category_name: MyString
+  sort_order: 1

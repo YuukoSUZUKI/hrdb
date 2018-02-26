@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Learning level:</strong>
+  <%= @tarent.learning_level %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @tarent.user %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @tarent.skill %>
+</p>
+
+<%= link_to 'Edit', edit_tarent_path(@tarent) %> |
+<%= link_to 'Back', tarents_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: skill_category, local: true) do |form| %>
+  <% if skill_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(skill_category.errors.count, "error") %> prohibited this skill_category from being saved:</h2>
+
+      <ul>
+      <% skill_category.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :skill_category_name %>
+    <%= form.text_field :skill_category_name, id: :skill_category_skill_category_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :sort_order %>
+    <%= form.number_field :sort_order, id: :skill_category_sort_order %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

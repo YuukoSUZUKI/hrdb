@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Skill category name:</strong>
+  <%= @skill_category.skill_category_name %>
+</p>
+
+<p>
+  <strong>Sort order:</strong>
+  <%= @skill_category.sort_order %>
+</p>
+
+<%= link_to 'Edit', edit_skill_category_path(@skill_category) %> |
+<%= link_to 'Back', skill_categories_path %>

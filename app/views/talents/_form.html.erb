@@ -1,0 +1,37 @@
+<%= form_with(model: talent, local: true) do |form| %>
+  <% if talent.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(talent.errors.count, "error") %> prohibited this talent from being saved:</h2>
+
+      <ul>
+      <% talent.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :name %>
+    <%= form.text_field :name, id: :talent_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :birth %>
+    <%= form.date_select :birth, id: :talent_birth %>
+  </div>
+
+  <div class="field">
+    <%= form.label :speciality %>
+    <%= form.text_area :speciality, id: :talent_speciality %>
+  </div>
+
+  <div class="field">
+    <%= form.label :memo %>
+    <%= form.text_area :memo, id: :talent_memo %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
