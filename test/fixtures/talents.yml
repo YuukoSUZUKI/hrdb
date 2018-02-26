@@ -1,13 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  birth: 2018-02-19
-  speciality: MyText
-  memo: MyText
+  learning_level: 1
+  user: one
+  skill: one
 
 two:
-  name: MyString
-  birth: 2018-02-19
-  speciality: MyText
-  memo: MyText
+  learning_level: 1
+  user: two
+  skill: two

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180223093645) do
+ActiveRecord::Schema.define(version: 20180226103658) do
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "employee_number"
@@ -40,22 +40,13 @@ ActiveRecord::Schema.define(version: 20180223093645) do
   end
 
   create_table "talents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "name"
-    t.date "birth"
-    t.text "speciality"
-    t.text "memo"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "tarents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "learning_level"
     t.bigint "user_id"
     t.bigint "skill_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["skill_id"], name: "index_tarents_on_skill_id"
-    t.index ["user_id"], name: "index_tarents_on_user_id"
+    t.index ["skill_id"], name: "index_talents_on_skill_id"
+    t.index ["user_id"], name: "index_talents_on_user_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -67,6 +58,6 @@ ActiveRecord::Schema.define(version: 20180223093645) do
   end
 
   add_foreign_key "skills", "skill_categories"
-  add_foreign_key "tarents", "skills"
-  add_foreign_key "tarents", "users"
+  add_foreign_key "talents", "skills"
+  add_foreign_key "talents", "users"
 end

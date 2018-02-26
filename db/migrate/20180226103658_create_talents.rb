@@ -1,10 +1,9 @@
 class CreateTalents < ActiveRecord::Migration[5.1]
   def change
     create_table :talents do |t|
-      t.string :name
-      t.date :birth
-      t.text :speciality
-      t.text :memo
+      t.integer :learning_level
+      t.references :user, foreign_key: true
+      t.references :skill, foreign_key: true
 
       t.timestamps
     end

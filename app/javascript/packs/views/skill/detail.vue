@@ -58,10 +58,12 @@
                               {id:'2', name:'フレームワーク', inputVisible:false ,inputValue:'' , items:['spring','struts2','cakePHP','.net','iBatis','dbflute']},
                               {id:'3', name:'OS・DB・ミドルウェア', inputVisible:false ,inputValue:'' ,items:['Linux','Oracle','MySQL','postgresql','Apache','Tomcat','redis','memcached']},
                               {id:'4', name:'業種', inputVisible:false ,inputValue:'' ,items:['人材紹介','保険代理店','小売','流通','不動産']},
-                              {id:'5', name:'ポジション・フェーズ', inputVisible:false ,inputValue:'' ,items:['PM','サブリーダー','要件定義','基本設計(外部設計)','詳細設計(内部設計)','結合テスト','総合テスト']},
+                              {id:'5', name:'ポジション', inputVisible:false ,inputValue:'' ,items:['PM','サブリーダー']},
+                              {id:'6', name:'フェーズ', inputVisible:false ,inputValue:'' ,items:['要件定義','基本設計(外部設計)','詳細設計(内部設計)','結合テスト','総合テスト']},
+                              {id:'7', name:'資格', inputVisible:false ,inputValue:'' ,items:['PMP','ITIL','Oracle Gold']},
                             ],
         //アコーディオンを最初から全て展開する
-        activeNames: ['1','2','3','4','5'],
+        activeNames: ['1','2','3','4','5','6','7'],
         
         //タグ
         // inputVisible: false,
