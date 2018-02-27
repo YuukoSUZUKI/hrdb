@@ -3,7 +3,7 @@ import Login from '../views/Login.vue'
 import NotFound from '../views/404.vue'
 import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
-import Table from '../views/skill/Table.vue'
+import UserManage from '../views/skill/UserManage.vue'
 import Form from '../views/skill/Form.vue'
 import user from '../views/skill/user.vue'
 import userDetail from '../views/skill/detail.vue'
@@ -11,6 +11,7 @@ import userDetail from '../views/skill/detail.vue'
 import Page5 from '../views/nav2/Page5.vue'
 import Page6 from '../views/nav3/Page6.vue'
 import echarts from '../views/report/echarts.vue'
+import EditEmployee from '../views/skill/EditEmployee.vue'
 
 let routes = [
     {
@@ -36,7 +37,8 @@ let routes = [
             { path: '/user', component: user, name: 'スキル検索' },
             { path: '/detail', component: userDetail, name: 'スキルシート詳細', hidden: true },
             { path: '/form', component: Form, name: 'スキルシート編集' },
-            { path: '/table', component: Table, name: '組織のスキルシート管理' },
+            { path: '/editEmployee/1/edit', component:EditEmployee, name:'社員情報編集'}, // TODO:仮に固定値を入れる。本当はログインユーザのIDを入れる。
+            { path: '/table', component: UserManage, name: 'ユーザ管理' },
         ]
     },
     // {

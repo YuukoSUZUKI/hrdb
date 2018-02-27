@@ -1,5 +1,5 @@
 #社員情報
-class EmployeesController < ApplicationController
+class Api::EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
   # GET /employees
@@ -20,6 +20,8 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1/edit
   def edit
+    @employee = Employee.find(params[:id])
+    render 'show',formats: 'json', handlers: 'jbuilder'
   end
 
   # POST /employees
