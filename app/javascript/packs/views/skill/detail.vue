@@ -83,8 +83,11 @@
       showInput(category) {
         category.inputVisible = true;
         this.$nextTick(_ => {
-          // let index = this.dynamicCategories.indexOf(category) -1;
-          // console.log(index);
+          let index = this.dynamicCategories.indexOf(category) -1;
+          console.log(index);
+          
+          category.inputValue.focus();
+          
           // let input = this.$refs.saveTagInput[index];
           // input.focus();
           

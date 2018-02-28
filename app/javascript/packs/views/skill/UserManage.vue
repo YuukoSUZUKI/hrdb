@@ -125,7 +125,6 @@
 					authority: -1,
 					password:''
 				}
-
 			}
 		},
 		methods: {
