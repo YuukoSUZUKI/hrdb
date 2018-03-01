@@ -1,13 +1,12 @@
 <template>
   <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
-    <h3 class="title">ログイン</h3>
+    <h3 class="title">HRDB</h3>
     <el-form-item prop="account">
       <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="アカウント"></el-input>
     </el-form-item>
     <el-form-item prop="checkPass">
       <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="パスワード"></el-input>
     </el-form-item>
-    <el-checkbox v-model="checked" checked class="remember">パスワードを記憶する</el-checkbox>
     <el-form-item style="width:100%;">
       <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">ログイン</el-button>
     </el-form-item>
@@ -35,7 +34,6 @@
             //{ validator: validaePass2 }
           ]
         },
-        checked: true
       };
     },
     methods: {
