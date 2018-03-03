@@ -1,4 +1,4 @@
-class UsersController < ApplicationController
+class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -15,6 +15,7 @@ class UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
+    #TODO ここでEmployeeもNewする
   end
 
   # GET /users/1/edit
@@ -25,7 +26,7 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-
+    #TODO:ここでEmployeeも空で作って登録する
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -35,6 +36,8 @@ class UsersController < ApplicationController
         format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
+    
+
   end
 
   # PATCH/PUT /users/1
@@ -55,10 +58,13 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
+        #TODO:破棄する時はEmployeeも破棄する
+    
     respond_to do |format|
       format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
       format.json { head :no_content }
     end
+
   end
 
   private
@@ -71,4 +77,6 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:account, :authority, :token)
     end
+    
+    #TODO:Employee分のパラメータは定義する必要ないはず。要確認。
 end

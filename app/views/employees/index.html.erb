@@ -6,6 +6,7 @@
   <thead>
     <tr>
       <th>Employee number</th>
+      <th>Name</th>
       <th>Birthday</th>
       <th>Speciality</th>
       <th>Memo</th>
@@ -18,6 +19,7 @@
     <% @employees.each do |employee| %>
       <tr>
         <td><%= employee.employee_number %></td>
+        <td><%= employee.name %></td>
         <td><%= employee.birthday %></td>
         <td><%= employee.speciality %></td>
         <td><%= employee.memo %></td>

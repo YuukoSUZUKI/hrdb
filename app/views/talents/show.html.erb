@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Learning level:</strong>
+  <%= @talent.learning_level %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @talent.user %>
+</p>
+
+<p>
+  <strong>Skill:</strong>
+  <%= @talent.skill %>
+</p>
+
+<%= link_to 'Edit', edit_talent_path(@talent) %> |
+<%= link_to 'Back', talents_path %>

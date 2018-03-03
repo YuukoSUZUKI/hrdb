@@ -10,10 +10,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180226103658) do
+ActiveRecord::Schema.define(version: 20180303024720) do
 
   create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "employee_number"
+    t.string "name"
     t.date "birthday"
     t.text "speciality"
     t.text "memo"
@@ -50,13 +51,15 @@ ActiveRecord::Schema.define(version: 20180226103658) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "user_name"
-    t.string "password_digest"
+    t.string "account"
     t.integer "authority"
+    t.string "token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["token"], name: "index_users_on_token", unique: true
   end
 
+  add_foreign_key "employees", "users"
   add_foreign_key "skills", "skill_categories"
   add_foreign_key "talents", "skills"
   add_foreign_key "talents", "users"

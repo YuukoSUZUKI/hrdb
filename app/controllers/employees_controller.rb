@@ -1,4 +1,3 @@
-#社員情報
 class EmployeesController < ApplicationController
   before_action :set_employee, only: [:show, :edit, :update, :destroy]
 
@@ -70,6 +69,6 @@ class EmployeesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def employee_params
-      params.require(:employee).permit(:employee_number, :birthday, :speciality, :memo, :user)
+      params.require(:employee).permit(:employee_number, :name, :birthday, :speciality, :memo, :user_id)
     end
 end

@@ -12,18 +12,18 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :user_name %>
-    <%= form.text_field :user_name, id: :user_user_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password_digest %>
-    <%= form.text_field :password_digest, id: :user_password_digest %>
+    <%= form.label :account %>
+    <%= form.text_field :account, id: :user_account %>
   </div>
 
   <div class="field">
     <%= form.label :authority %>
     <%= form.number_field :authority, id: :user_authority %>
+  </div>
+
+  <div class="field">
+    <%= form.label :token %>
+    <%= form.text_field :token, id: :user_token %>
   </div>
 
   <div class="actions">
