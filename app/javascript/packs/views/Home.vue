@@ -2,7 +2,10 @@
 	<el-row class="container">
 		<el-col :span="24" class="header">
 			<el-col :span="10" class="logo" :class="collapsed?'logo-collapse-width':'logo-width'">
+				<!--
 				{{collapsed?'':sysName}}
+				-->
+				<i class="el-icon-search"></i>mel
 			</el-col>
 			<el-col :span="10">
 				<!-- メニューを仕舞うボタンで表示が崩れるので、解消するまで非表示

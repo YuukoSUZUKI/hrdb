@@ -38,6 +38,14 @@ let routes = [
             { path: '/detail', component: userDetail, name: 'スキルシート詳細', hidden: true },
             { path: '/form', component: Form, name: 'スキルシート編集' },
             { path: '/editEmployee/1/edit', component:EditEmployee, name:'社員情報編集'}, // TODO:仮に固定値を入れる。本当はログインユーザのIDを入れる。
+        ]
+    },
+    {
+        path: '/',
+        component: Home,
+        name: 'メンテナンス',
+        iconCls: 'fa fa-cog',
+        children: [
             { path: '/table', component: UserManage, name: 'ユーザ管理' },
         ]
     },
