@@ -20,34 +20,32 @@
 			</el-input>
 		</el-form-item>
 		
-		<!-- TODO 'name'プロパティでスクリプトエラーが出る -->
-		<el-from-item label="経験・スキル">
-		  <el-checkbox-group v-model="employee.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
-	  	  <!-- スキルタグ -->
-	  	  <el-collapse v-model="activeNames">
-	        <el-collapse-item v-for="(category, key, index) in dynamicCategories" 
-	            :key="category.id" :title="category.catName" :name="category.id">
-	          
-	          <el-checkbox :key="tag" v-for="tag in category.items" :label="tag" border>
-	          </el-checkbox>
-	
-	          <el-input
-	            class="input-new-tag"
-	            v-show="category.inputVisible"
-	            v-model="category.inputValue"
-	            ref="saveTagInput"
-	            size="mini"
-	            @keyup.enter.native="handleInputConfirm(category)"
-	            @blur="handleInputConfirm(category)"
-	          >
-	          </el-input>
-	          <el-button v-show="category.inputVisible === false" class="button-new-tag" size="small" @click="showInput(category)">+ 追加</el-button>        
-	  
-	        </el-collapse-item>
-	      </el-collapse>
-	    </el-checkbox-group>
+		<!-- el-from-item にしていないのは、使うとname プロパティでスクリプトエラーが出る(collapseとの相性か) -->
+	  <el-checkbox-group v-model="employee.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
+  	  <!-- スキルタグ -->
+  	  <el-collapse v-model="activeNames">
+        <el-collapse-item v-for="(category, key, index) in dynamicCategories" 
+            :key="category.id" :title="category.catName" :name="category.id">
+          
+          <el-checkbox :key="tag" v-for="tag in category.items" :label="tag" border>
+          </el-checkbox>
+
+          <el-input
+            class="input-new-tag"
+            v-show="category.inputVisible"
+            v-model="category.inputValue"
+            ref="saveTagInput"
+            size="mini"
+            @keyup.enter.native="handleInputConfirm(category)"
+            @blur="handleInputConfirm(category)"
+          >
+          </el-input>
+          <el-button v-show="category.inputVisible === false" class="button-new-tag" size="small" @click="showInput(category)">+ 追加</el-button>        
+  
+        </el-collapse-item>
+      </el-collapse>
+    </el-checkbox-group>
 			
-		</el-from-item>
 		<el-form-item>
 			<el-button type="primary">更新</el-button>
 			<el-button @click.native.prevent>キャンセル</el-button>

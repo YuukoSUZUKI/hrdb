@@ -1,0 +1,6 @@
+<% props = {
+    employee: @user.employee
+    talents: @user.talents
+  }.to_json
+%>
+<div id="userDetailApp" data="<%= props %>"></div>

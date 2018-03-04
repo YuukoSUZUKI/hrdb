@@ -9,6 +9,10 @@ Rails.application.routes.draw do
 
   # API用のエンドポイント設定
   namespace :api, format:'json' do
+    resources :skill_categories, only: [:index]
+    resources :skills, only: [:show, :new, :create]
+    resources :users
+    resources :user_details, only: [:show, :edit, :update]
     resources :employees, only: [:show, :edit, :update, :create]
     
   end

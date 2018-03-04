@@ -179,6 +179,7 @@
 			},
 			//追加画面を表示する
 			handleAdd: function () {
+				console.log('handleAdd')
 				this.addFormVisible = true;
 				this.addForm = {
 					name: '',

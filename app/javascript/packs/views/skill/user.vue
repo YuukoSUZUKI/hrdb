@@ -18,7 +18,7 @@
 					<el-button type="primary" icon="el-icon-search" v-on:click="getUser">検索</el-button>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="default" >詳細な条件で検索</el-button>
+					<el-button type="default" @click="dialogFormVisible = true" >詳細な条件で検索</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -45,6 +45,33 @@
 			</el-table>
 		</template>
 
+		<!-- 詳細検索ダイアログ -->
+		<el-dialog title="スキル詳細検索" :visible.sync="dialogFormVisible">
+		  <el-form :model="detailform" label-position="left">
+		    <el-form-item label="氏名" :label-width="formLabelWidth">
+		      <el-input v-model="detailform.name" auto-complete="off"></el-input>
+		    </el-form-item>
+				  <el-checkbox-group v-model="detailform.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
+			  	  <!-- スキルタグ -->
+			  	  <el-collapse >
+			        <el-collapse-item v-for="(category, key, index) in dynamicCategories" 
+			            :key="category.id" :title="category.catName" >
+			          
+			          <el-checkbox :key="tag" v-for="tag in category.items" :label="tag" border>
+			          </el-checkbox>
+			          
+			        </el-collapse-item>
+			      </el-collapse>
+			    </el-checkbox-group>
+
+		  </el-form>
+		  <span slot="footer" class="dialog-footer">
+		    <el-button @click="dialogFormVisible = false">キャンセル</el-button>
+		    <el-button type="primary" icon="el-icon-search" @click="detailedSearch">検索</el-button>
+		  </span>
+		</el-dialog>
+
+
 	</section>
 </template>
 <script>
@@ -60,6 +87,25 @@
 				users: [
 				],
         links: [], 
+        
+        //詳細検索ダイアログ
+        dialogFormVisible: false,
+        detailform: {
+          name: '二郎',
+          //スキルチェックボックス
+	        selectedSkills: ['VB','java'],
+        },
+        formLabelWidth: '120px',
+        //アコーディオンとタグのデータ
+	      dynamicCategories: [ {id:'1',catName:'言語', inputVisible:false ,inputValue:'' ,items:['java','C#','PHP','VB']},
+	                              {id:'2', catName:'フレームワーク', inputVisible:false ,inputValue:'' , items:['spring','struts2','cakePHP','.net','iBatis','dbflute']},
+	                              {id:'3', catName:'OS・DB・ミドルウェア', inputVisible:false ,inputValue:'' ,items:['Linux','Oracle','MySQL','postgresql','Apache','Tomcat','redis','memcached']},
+	                              {id:'4', catName:'業種', inputVisible:false ,inputValue:'' ,items:['人材紹介','保険代理店','小売','流通','不動産']},
+	                              {id:'5', catName:'ポジション', inputVisible:false ,inputValue:'' ,items:['PM','サブリーダー']},
+	                              {id:'6', catName:'フェーズ', inputVisible:false ,inputValue:'' ,items:['要件定義','基本設計(外部設計)','詳細設計(内部設計)','結合テスト','総合テスト']},
+	                              {id:'7', catName:'資格', inputVisible:false ,inputValue:'' ,items:['PMP','ITIL','Oracle Gold']},
+	                            ],
+
 			}
 		},
 		methods: {
@@ -107,6 +153,12 @@
         console.log(item);
       },
 			// /オートコンプリート関連
+      
+      //詳細検索
+      detailedSearch(){
+      	this.dialogFormVisible = false;
+      	this.getUser();
+      },
       
       //行選択
     	handleRowSelect(row, event, column) {

@@ -12,7 +12,6 @@ class Api::EmployeesController < ApplicationController
   # 編集 指定idの社員情報を検索して、画面側にrender
   # GET /employees/1/edit
   def edit
-    @employee = Employee.find(params[:id])
     render 'show',formats: 'json', handlers: 'jbuilder'
   end
 
@@ -37,15 +36,15 @@ class Api::EmployeesController < ApplicationController
     # 社員情報を変数に設定
     def set_employee
       @employee = Employee.find(params[:id])
-#      @talents = Talent.find(@employee.id)
+      @talents = Talent.find(@employee.id)
     end
 
     #社員パラメータ
     def employee_params
 #TODO:birthdayは未決定なのでパラメータから外す。
-      params.require(:employee).permit(:employee_number, :name, :speciality, :memo)
+#      params.require(:employee).permit(:employee_number, :name, :speciality, :memo)
 #できればtalentsが配列であるだけではなく、idがあることも確認したい。
-#      params.require(:employee).permit(:employee_number, :name, :speciality, :memo, talents:[])
+      params.require(:employee).permit(:employee_number, :name, :speciality, :memo, talents:[])
     end
     
     #タレントの配列パラメータ(内容もチェック)

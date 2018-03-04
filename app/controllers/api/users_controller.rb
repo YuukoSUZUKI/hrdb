@@ -15,7 +15,8 @@ class Api::UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    #TODO ここでEmployeeもNewする
+    @user.employee.new
+    @user.talents.build
   end
 
   # GET /users/1/edit
@@ -26,10 +27,9 @@ class Api::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    #TODO:ここでEmployeeも空で作って登録する
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
+        format.html { redirect_to api_user_url(@user), notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else
         format.html { render :new }
@@ -44,9 +44,9 @@ class Api::UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { render :show, status: :ok, location: @user }
+      if @user.update(update_user_params)
+        format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を更新しました。' }
+        format.json { render :show, status: :ok}
       else
         format.html { render :edit }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -58,10 +58,8 @@ class Api::UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     @user.destroy
-        #TODO:破棄する時はEmployeeも破棄する
-    
     respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
+      format.html { redirect_to users_url, notice: 'ユーザを削除しました' }
       format.json { head :no_content }
     end
 
@@ -75,8 +73,11 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:account, :authority, :token)
+      params.require(:user).permit(:account, :authority)
     end
     
-    #TODO:Employee分のパラメータは定義する必要ないはず。要確認。
+    def update_user_params
+      params.require(:user).permit(:account, :authority, employee_attributes: [:employee_number, :name, :speciality, :memo,:id], talents_attributes: [:learning_level,:id])
+    
+    end
 end
