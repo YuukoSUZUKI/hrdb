@@ -16,12 +16,13 @@ class Api::UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @user.employee.new
-    @user.talents.build
+    @user.build_employee
+    @user.build_talents
   end
 
   # GET /users/1/edit
   def edit
+    render 'show',formats: 'json', handlers: 'jbuilder'
   end
 
   # POST /users
@@ -45,7 +46,7 @@ class Api::UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     respond_to do |format|
-      if @user.update(update_user_params)
+      if @user.update(user_params)
         format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を更新しました。' }
         format.json { render :show, status: :ok}
       else
@@ -74,10 +75,7 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:account, :authority)
+      params.require(:user).permit(:account, :authority, :password, employee_attributes: [:employee_number, :name, :id])
     end
-    
-    def update_user_params
-      params.require(:user).permit(:account, :authority, employee_attributes: [:employee_number, :name, :speciality, :memo,:id], talents_attributes: [:learning_level,:id])
-    end
+
 end

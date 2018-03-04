@@ -15,7 +15,7 @@ for (let i = 0; i < 86; i++) {
   Users.push(Mock.mock({
     id: Mock.Random.guid(),
     employeeId: Mock.Random.integer(1,9999),
-    employee_number: Mock.Random.string('number', 1, 3),
+    employee_number: Mock.Random.integer(1,9999),
     name: Mock.Random.name(),
     addr: Mock.mock('@county(true)'),
     'age|18-60': 1,

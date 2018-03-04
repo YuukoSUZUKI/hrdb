@@ -6,7 +6,7 @@ import Main from '../views/Main.vue'
 import UserManage from '../views/skill/UserManage.vue'
 import Form from '../views/skill/Form.vue'
 import user from '../views/skill/user.vue'
-import userDetail from '../views/skill/detail.vue'
+import EmployeeDetail from '../views/skill/EmployeeDetail.vue'
 // import Page4 from '../views/nav2/Page4.vue'
 import Page5 from '../views/nav2/Page5.vue'
 import Page6 from '../views/nav3/Page6.vue'
@@ -35,7 +35,7 @@ let routes = [
         children: [
             { path: '/main', component: Main, name: 'メイン', hidden: true },
             { path: '/user', component: user, name: 'スキル検索' },
-            { path: '/detail', component: userDetail, name: 'スキルシート詳細', hidden: true },
+            { path: '/employeeDetail', component: EmployeeDetail, name: 'スキルシート詳細', hidden: true },
             { path: '/form', component: Form, name: 'スキルシート編集' },
             { path: '/editEmployee/1/edit', component:EditEmployee, name:'社員情報編集'}, // TODO:仮に固定値を入れる。本当はログインユーザのIDを入れる。
         ]

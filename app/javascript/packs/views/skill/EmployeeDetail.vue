@@ -7,15 +7,37 @@
         <span >人財太郎</span>
         <el-button style="float: right; padding: 3px 0" type="text">何かの操作</el-button>
       </div>
-      <div class="text item">
-        社員No.
-      </div>
-      <div class="text item">
-        氏名
-      </div>
-      <div class="text item">
-        備考
-      </div>
+      <el-row :gutter="20">
+        <el-col :span="12">
+          <div class="item label">社員No.</div>
+          <div class="text content">
+            440
+          </div>
+        </el-col>
+        <el-col :span="12">
+          <div class="text label">年齢</div>
+          <div class="text content">
+            37
+          </div>
+        </el-col>
+      </el-row>
+      <el-row>
+        <el-col :span="24">
+          <div class="text label">得意領域</div>
+          <div class="text content">
+            JavaでのWeb開発、BtoCサイトのディレクション
+            アーキテクト
+          </div>
+        </el-col>
+      </el-row>      
+      <el-row>
+        <el-col :span="24">
+          <div class="text label">特記事項</div>
+          <div class="text content">
+            最近眼精疲労で長時間の作業が厳しい
+          </div>
+        </el-col>
+      </el-row>      
     </el-card>
 	  
 	  <!-- スキルタグ -->
@@ -59,11 +81,27 @@
   }
 </script>
 
-<style>
+<style scoped lang="scss">
 /* 基本情報カードのスタイル */
-  .item {
-    margin-bottom: 18px;
+  .el-row {
+    margin-bottom: 20px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
+  
+  .item {
+    color :red;
+  }
+  
+  .label {
+    color : gray;
+  }
+  
+  .content {
+    color : navy;
+  }
+  
 
   .clearfix:before,
   .clearfix:after {
@@ -75,7 +113,7 @@
   }
 
   .box-card {
-    width: 480px;
+    width: 600px;
   }
 
 /* タグのスタイル */

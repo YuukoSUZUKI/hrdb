@@ -157,7 +157,7 @@
       //行選択
     	handleRowSelect(row, event, column) {
         console.log(column);
-        this.$router.push({ path: '/detail', query: { id: row.employeeId }})
+        this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
 			},
 
 		},
