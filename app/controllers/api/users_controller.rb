@@ -1,5 +1,6 @@
 # ユーザ情報の作成・更新。ここでは更新する際に、紐づく社員情報・タレント情報も一度に作成/削除するが、社員情報やタレント情報の編集は、user_detailsで行う。
 class Api::UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token   #MEMOこれを入れて本当に良い？
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
@@ -16,8 +17,7 @@ class Api::UsersController < ApplicationController
   # GET /users/new
   def new
     @user = User.new
-    @user.build_employee
-    @user.build_talents
+    @user.employee = Employee.new if @user.employee.blank?
   end
 
   # GET /users/1/edit
@@ -29,8 +29,13 @@ class Api::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.save
+    @employee = Employee.new(user_params[:employee])#ここでnameやemployee_numberがなぜか入らない
+    @employee.user_id=@user.id
+    @employee.name=user_params[:employee]
+    @employee.employee_number = user_params[:employee]
     respond_to do |format|
-      if @user.save
+      if @employee.save
         format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を作成しました' }
         format.json { render :show, status: :created }
       else
@@ -75,7 +80,7 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:account, :authority, :password, employee_attributes: [:employee_number, :name, :id])
+      params.require(:user).permit(:id, :account, :password,:authority,  {employee_attributes: [:employee_number, :name,:id]})
     end
 
 end

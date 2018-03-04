@@ -1,10 +1,12 @@
 
 <template>
 	<section>
+	  <el-button type="primary" icon="el-icon-arrow-left"  @click="goPrevious">戻る</el-button>
+	  
 	  <!-- 基本情報 -->
 	  <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span >人財太郎</span>
+        <span class="employee-name">人財太郎</span>
         <el-button style="float: right; padding: 3px 0" type="text">何かの操作</el-button>
       </div>
       <el-row :gutter="20">
@@ -25,7 +27,7 @@
         <el-col :span="24">
           <div class="text label">得意領域</div>
           <div class="text content">
-            JavaでのWeb開発、BtoCサイトのディレクション
+            JavaでのWeb開発、BtoCサイトのディレクション<br>
             アーキテクト
           </div>
         </el-col>
@@ -77,31 +79,38 @@
       };
     },
     methods: {
+      goPrevious(){
+        this.$router.go(-1);
+      },
     }
   }
 </script>
 
 <style scoped lang="scss">
 /* 基本情報カードのスタイル */
+  .box-card {
+    width: 600px;
+    margin-top: 16px;
+  }
+  .employee-name {
+    font-size : 20px;
+  }
   .el-row {
     margin-bottom: 20px;
     &:last-child {
       margin-bottom: 0;
     }
   }
-  
   .item {
     color :red;
   }
-  
   .label {
-    color : gray;
+    font-size : 12px;
+    color : #777;
   }
-  
   .content {
-    color : navy;
+    font-size : 16px;
   }
-  
 
   .clearfix:before,
   .clearfix:after {
@@ -110,10 +119,6 @@
   }
   .clearfix:after {
     clear: both
-  }
-
-  .box-card {
-    width: 600px;
   }
 
 /* タグのスタイル */

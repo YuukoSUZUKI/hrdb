@@ -22,7 +22,15 @@ Vue.use(ElementUI, {locale})
 
 Vue.use(VueRouter)
 const router = new VueRouter({
-  routes
+  routes,
+  scrollBehavior (to, from, savedPosition) {
+    // 戻る、進むの遷移時にスクロール位置をキープ
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  }
 })
 
 //セッションチェック

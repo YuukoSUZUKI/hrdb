@@ -1,1 +1,1 @@
-{"user":{"id":1,"account":"admin","password":null,"authority":1,"employee":{"id":2,"employee_number":0,"name":"管理者"}}}
+{"user":{"id":14,"account":"dummy","password":"foobarboo","authority":2,"employee":{"id":5,"employee_number":null,"name":null}}}
