@@ -15,13 +15,15 @@ for (let i = 0; i < 86; i++) {
   Users.push(Mock.mock({
     id: Mock.Random.guid(),
     employeeId: Mock.Random.integer(1,9999),
+    employee_number: Mock.Random.string('number', 1, 3),
     name: Mock.Random.name(),
     addr: Mock.mock('@county(true)'),
     'age|18-60': 1,
     birth: Mock.Random.date(),
     sex: Mock.Random.integer(0, 1),
     username:Mock.Random.name(),
-    authority:Mock.Random.integer(1,2)
+    authority:Mock.Random.integer(1,2),
+    speciality: Mock.mock('@sentence'),
   }));
 }
 

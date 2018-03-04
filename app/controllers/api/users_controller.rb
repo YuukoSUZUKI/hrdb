@@ -1,3 +1,4 @@
+# ユーザ情報の作成・更新。ここでは更新する際に、紐づく社員情報・タレント情報も一度に作成/削除するが、社員情報やタレント情報の編集は、user_detailsで行う。
 class Api::UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
@@ -29,8 +30,8 @@ class Api::UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to api_user_url(@user), notice: 'User was successfully created.' }
-        format.json { render :show, status: :created, location: @user }
+        format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を作成しました' }
+        format.json { render :show, status: :created }
       else
         format.html { render :new }
         format.json { render json: @user.errors, status: :unprocessable_entity }
@@ -78,6 +79,5 @@ class Api::UsersController < ApplicationController
     
     def update_user_params
       params.require(:user).permit(:account, :authority, employee_attributes: [:employee_number, :name, :speciality, :memo,:id], talents_attributes: [:learning_level,:id])
-    
     end
 end

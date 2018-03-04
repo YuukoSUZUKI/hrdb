@@ -29,13 +29,11 @@
 				@row-click="handleRowSelect">
 				<el-table-column type="index" width="60">
 				</el-table-column>
-				<el-table-column prop="employeeId" label="社員No." width="120" sortable>
+				<el-table-column prop="employee_number" label="社員No." width="120" sortable>
 				</el-table-column>
 				<el-table-column prop="name" label="氏名" width="120" sortable>
 				</el-table-column>
-				<el-table-column prop="sex" label="性别" width="100" :formatter="formatSex" sortable>
-				</el-table-column>
-				<el-table-column prop="age" label="年齢" width="100" sortable>
+				<el-table-column prop="speciality" label="得意領域">
 				</el-table-column>
 				<el-table-column label="" width="60">
 					<template slot-scope="scope">
@@ -109,10 +107,6 @@
 			}
 		},
 		methods: {
-			//性别表示
-			formatSex: function (row, column) {
-				return row.sex == 1 ? '男' : row.sex == 0 ? '女' : '不明';
-			},
 			//検索処理
 			getUser: function () {
 				let para = {
@@ -185,5 +179,6 @@
 		height :  350px;
 	}
 }
+
 
 </style>

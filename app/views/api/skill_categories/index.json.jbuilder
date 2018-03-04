@@ -5,11 +5,6 @@ json.skill_categories do
     json.(skill_category, :id, :skill_category_name, :sort_order)
     json.skills(skill_category.skills, :id, :skill_name, :has_learning_level) 
     
-#    json.extract! skill_category, :id, :skill_category_name, :sort_order
-#    
-#    json.array!(skill_category(:skills)) do |skill|
-#      json.extract! skill, :id, :skill_name, :has_learning_level
-#    end
   end
 end
 
