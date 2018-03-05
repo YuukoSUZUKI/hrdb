@@ -29,13 +29,8 @@ class Api::UsersController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
-    @user.save
-    @employee = Employee.new(user_params[:employee])#ここでnameやemployee_numberがなぜか入らない
-    @employee.user_id=@user.id
-    @employee.name=user_params[:employee]
-    @employee.employee_number = user_params[:employee]
     respond_to do |format|
-      if @employee.save
+      if @user.save
         format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を作成しました' }
         format.json { render :show, status: :created }
       else
@@ -80,7 +75,7 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:id, :account, :password,:authority,  {employee_attributes: [:employee_number, :name,:id]})
+      params.require(:user).permit(:account, :password,:authority,  employee_attributes: [:employee_number, :name,:id,:_destroy])
     end
 
 end
