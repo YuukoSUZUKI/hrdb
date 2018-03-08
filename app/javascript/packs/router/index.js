@@ -12,6 +12,7 @@ import Page5 from '../views/nav2/Page5.vue'
 import Page6 from '../views/nav3/Page6.vue'
 import echarts from '../views/report/echarts.vue'
 import EditEmployee from '../views/skill/EditEmployee.vue'
+import Sandbox from '../views/nav2/Sandbox.vue'
 
 let routes = [
     {
@@ -49,6 +50,17 @@ let routes = [
             { path: '/table', component: UserManage, name: 'ユーザ管理' },
         ]
     },
+    {
+        path: '/',
+        component: Home,
+        name: 'そのた',
+        iconCls: 'el-icon-message',
+        children: [
+            { path: '/sandbox', component: Sandbox, name: 'お砂場' }
+        ]
+    },
+
+    
     // {
     //     path: '/',
     //     component: Home,

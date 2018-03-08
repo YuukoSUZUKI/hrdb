@@ -1,0 +1,694 @@
+    1  ruby -version
+    2  ruby --version
+    3  sudo yum -y update
+    4  sudo yum -y install ruby
+    5  mkdir hrdb-web
+    6  rvm use ruby-2.4.1@testapp --ruby-version --create
+    7  cd hrdb-web/
+    8  rvm use ruby-2.4.1@testapp --ruby-version --create
+    9  rvm use ruby-2.4.1@hrdb-web --ruby-version --create
+   10  cd ../
+   11  rm -r hrdb-web
+   12  mkdir hrdb-api
+   13  cd hrdb-api
+   14  cd ../
+   15  rm hrdb-api
+   16  rm -r hrdb-api
+   17  ruby -version
+   18  rails -v
+   19  rails new hrdb-web --webpack=vue
+   20  yarn-v
+   21  yarn -v
+   22  yum install yarn
+   23  sudo yum install yarn
+   24  npm install -g yarn
+   25  yarn -v
+   26  rails  webpacker:install:vue
+   27  cd hrdb-web/
+   28  rails  webpacker:install:vue
+   29  webpacker:install
+   30  rails webpacker:install
+   31  rails webpacker:install:vue
+   32  rails s
+   33  gem update
+   34  bundle update
+   35  gem install rails
+   36  gem list
+   37  rvm use ruby-2.4.1@hrdb-web --ruby-version --create
+   38  mysql
+   39  mysql --version
+   40  sudo service mysqld start
+   41  mysql -u root 
+   42  mysql
+   43  gem install
+   44  gem install mysql2
+   45  sudo yum install mysql-devel
+   46  gem install mysql2
+   47  bundle install
+   48  bundle exec rake db:create
+   49  bundle exex rails g scaffold talents
+   50  bundle exec rails g scaffold talents
+   51  bundle exec rake db:create
+   52  bundle exec rails g scaffold talents
+   53  rails destroy scaffold talents
+   54  rails generate scaffold talents name:string birth:date speciality:text memo:text 
+   55  rails db:migrate
+   56  rails  db:migrate
+   57  sudo vi /etc/my.cnf 
+   58  sudo service mysqld stop
+   59  sudo service mysqld start
+   60  rails db:drop
+   61  rails db:create
+   62  rails db:migrate
+   63  bundle install
+   64  sudo service mysqld start
+   65  rails generate scaffold talents name:string birth:date speciality:text memo:text 
+   66  rails db:migrate
+   67  cd ./workspace
+   68  cd ..
+   69  ll
+   70  cd environment/
+   71  ll
+   72  git init
+   73  cat ~/.ssh/id_rsa.pub
+   74  ssh-keygen -t rsa -b 4096 -C "yu-suzuki@sts-inc.co.jp"
+   75  chmod 600 ~/.ssh/id_rsa.pub 
+   76  ls -la ~/.ssh/id_rs*
+   77  cat ~/.ssh/id_rsa.pub 
+   78  git remote add origin git@github.com:YuukoSUZUKI/hrdb.git
+   79  git push -u origin master
+   80  git push git@github.com:YuukoSUZUKI/hrdb.git master
+   81  cd ..
+   82  git push git@github.com:YuukoSUZUKI/hrdb.git master
+   83  cd ./environment/
+   84  git remote add origin https://github.com/YuukoSUZUKI/hrdb.git
+   85  git push -u origin master
+   86  git remote remove origin git@github.com:YuukoSUZUKI/hrdb.git
+   87  git remote remove origin
+   88  git remote add origin https://github.com/YuukoSUZUKI/hrdb.git
+   89  git push -u origin master
+   90  git config --global user.name "YuukoSUZUKI"
+   91  git config --global user.email "yu-suzuki@sts-inc.co.jp"
+   92  git init
+   93  git add README.md
+   94  git add .
+   95  git commit -m "first commit"
+   96  git log
+   97  git remote add origin https://github.com/YuukoSUZUKI/hrdb.git
+   98  git remote remove origin
+   99  git remote add origin https://github.com/YuukoSUZUKI/hrdb.git
+  100  git push -u origin master
+  101  git remote remove origin
+  102  git remote add origin git@github.com:YuukoSUZUKI/hrdb.git
+  103  git push -u origin master
+  104  rails g model user userName:string password_digest:string authority:integer
+  105  rails console
+  106  rails g model user user_name:string password_digest:string authority:integer
+  107  rails g scaffold user user_name:string password_digest:string authority:integer
+  108  ruby --version
+  109  rails g scaffold skill_category skill_category_name:string sort_order:integer
+  110  rails new
+  111  rails console
+  112  rails g scaffold skill_category skill_category_name:string sort_order:integer
+  113  cd hrdb-web/
+  114  rails g scaffold skill_category skill_category_name:string sort_order:integer
+  115  vi Gemfile
+  116  bundle install
+  117  rails g scaffold user user_name:string password_digest:string authority:integer
+  118  history
+  119  rails g scaffold skill skill_name:string has_learning_level:boolean author:skill_category
+  120  rails g scaffold skill skill_name:string has_learning_level:boolean skill_category:references
+  121  rails db:migrate
+  122  mysql.server start
+  123  mysql-ctl start
+  124  rake db:migrate
+  125  sudo mysql.server start
+  126  sudo mysql.server restart
+  127  sudo mysql-dtl restart
+  128  sudo mysql-ctl restart
+  129  mysql -u root -p
+  130  rails db:migrate
+  131  sudo service mysqld start
+  132  rails db:generate
+  133  rails db:migrate
+  134  cd hrdb-web/
+  135  rails db:migrate
+  136  mysql
+  137  rails g scaffold employee employee_number:integer birthday:date speciality:text memo:text user:reference
+  138  git push -u origin master
+  139  git commit -m "db追加"
+  140  git add *
+  141  git commit -m "db追加"
+  142  git push origin master
+  143  cd ..
+  144  git push origin master
+  145  git add *
+  146  git commit
+  147  o
+  148  git commit -m "更新"
+  149  git push origin master
+  150  history
+  151  yarn add element-ui
+  152  yarn add -D babel-plugin-component
+  153  import Vue from 'vue'
+  154  cd hrdb-web/
+  155  rails db:migrate RAILS_ENV=development
+  156  cd ..
+  157  rails db:migrate RAILS_ENV=development
+  158  cd hrdb-web/
+  159  rails db:migrate
+  160  cd hrdb-web/
+  161  rails db:migrate
+  162  npm list | grep element
+  163  npm install element-ui -s
+  164  npm run build
+  165  rails destroy scaffold tarent
+  166  rails db:drop
+  167  cd ..
+  168  rails db:drop
+  169  cd hrdb-web/
+  170  sudo service mysqld start
+  171  rails db:drop
+  172  rails generate scaffold tarent learning_level:number user:references skill:references
+  173  rails db:migrate
+  174  history
+  175  rails db:migrate RAILS_ENV=development
+  176  rails db:migrate RAILS_ENV=test
+  177  sudo service mysqld start
+  178  mysql
+  179  rails db:migrate
+  180  bundle exec rake db:migrate RAILS_ENV=test
+  181  bundle exec rake db:create:all
+  182  bundle exec rake db:create:all RAILS_ENV=development
+  183  bundle exec rake db:create:all RAILS_ENV=test
+  184  bundle exec rake db:migrate RAILS_ENV=development
+  185  cd ..
+  186  git add *
+  187  git commit -m "db追加、Element-UI追加"
+  188  git push origin master
+  189  chkconfig --list mysqld
+  190  chkconfig mysqld on
+  191  sudo chkconfig mysqld on
+  192  chkconfig --list mysqld
+  193  sudo service mysqld start
+  194  git status
+  195  cd hrdb-web/
+  196  vi .gitignore 
+  197  git status
+  198  git log
+  199  git add
+  200  git add .
+  201  git commit -m -a "DB定義 elementUI"
+  202  git commit -a -m "DB定義 elementUI"
+  203  git branch installEmelentUI
+  204  git status
+  205  git push
+  206  git push origin
+  207  git push origin master
+  208  git push --set-upstresm  origin master
+  209  git push origin master
+  210  git fetch
+  211  git fetch origin
+  212  git
+  213  git branch
+  214  git branch -D installEmelentUI
+  215  git branch
+  216  yarn add element-ui
+  217  mpm install element-ui
+  218  webpack
+  219  yarn add element-ui
+  220  yarn install
+  221  webpack
+  222  cd hrdb-web/
+  223  yarn add vue-router
+  224  yarn install vue-router
+  225  yarn install
+  226  yarn add axios
+  227  yarn add echarts
+  228  yarn add axios-mock-adapter
+  229  yarn add mockjs
+  230  git status
+  231  git add
+  232  git add .
+  233  git commit
+  234  git commit -a -m "テンプレート vue-admin導入(仮"
+  235  yarn add font-awsome
+  236  yarn add font-awesome
+  237  ll
+  238  rm -rf .git
+  239  cd hrdb-web/
+  240  git init
+  241  ll
+  242  la
+  243  ls -a
+  244  rm -rf .git
+  245  ls -a
+  246  cd app
+  247  ls -a
+  248  cd ..
+  249  git init
+  250  git config --global user.name "YuukoSUZUKI"
+  251  git config --global user.email "yu-suzuki@sts-inc.co.jp"
+  252  git add *
+  253  ll
+  254  git add .
+  255  git commit -m "UPしなおし"
+  256  git remote add origin git@github.com:YuukoSUZUKI/hrdb.git
+  257  git push -u origin master
+  258  git status
+  259  git fetch
+  260  rails db:rollback
+  261  rails db:migrate
+  262  rails destroy scaffold talent
+  263  rails generate migration correctTypoTalent
+  264  bundle exec rake db:migrate
+  265  rails db:migrate
+  266  rails destroy scaffold tarent
+  267  db:migrate
+  268  rails db:migrate
+  269  rails generate model talent learning_level:integer user:references skill:references
+  270  rails db:migration
+  271  rails db:migrate
+  272  git add .
+  273  git comment -m "DBのTalentのタイプミス修正"
+  274  git commit -m "DBのTalentのタイプミス修正"
+  275  git push origin master
+  276  rails console
+  277  curl localhost:3000/api/employee/1
+  278  curl localhost:5000/api/employee/1
+  279  curl localhost:8080/api/employee/1
+  280  yarn add axios
+  281  shutdown -r now
+  282  sudo shutdown -r now
+  283  ps ax|grep rails
+  284  history
+  285  ls -la
+  286  cd hrdb-web/
+  287  git add .
+  288  git add *
+  289  git commit -m "ユーザ管理画面修正"
+  290  git push origin master
+  291  cd .
+  292  cd ..
+  293  git add *
+  294  cd hrdb-web/
+  295  git add *
+  296  git commit -m "2/27修正分"
+  297  git push origin master
+  298  git status
+  299  cd hrdb-web/
+  300  git status
+  301  git add git add app/javascript/packs/views/skill/EditEmployee.vue
+  302  git add app/javascript/packs/views/skill/detail.vue
+  303  git commit -m "スキル仮実装"
+  304  git push
+  305  git add *
+  306  git commit -m "2/28修正分"
+  307  git push origin master
+  308  rails console
+  309  cd hrdb-web/
+  310  git status
+  311  cd hrdb-web/
+  312  get status
+  313  git status
+  314  git add app/javascript/packs/views/Login.vue
+  315  git commit -m "ログイン画面 自動ログインチェックを削除"
+  316  git push
+  317  git status
+  318  git add app/javascript/packs/views/Home.vue
+  319  git commit -m "ホーム メニューの開き方、ログアウトボタン"
+  320  git push
+  321  yarn add element-ui
+  322  git status
+  323  git reset app/assets/stylesheets/element-variables.scss
+  324  git status
+  325  git reset HARD app/assets/stylesheets/element-variables.scss
+  326  git reset HEAD app/assets/stylesheets/element-variables.scss
+  327  git status
+  328  git reset app/javascript/packs/main.js
+  329  git reset HEAD app/javascript/packs/main.js
+  330  git checkout app/javascript/packs/main.js
+  331  df -h
+  332  ls -la log/
+  333  ls -lah log/
+  334  ls -lah ./
+  335  ls -lah ../hrdb-web/
+  336  ls -lah ../
+  337  du -h
+  338  du -h ../
+  339  du -sh /
+  340  sudo du -sh /
+  341  sudo du -sh /*
+  342  cwd
+  343  sudo du -sh /usr/
+  344  sudo du -sh /usr/*
+  345  sudo du -sh /usr/local/*
+  346  sudo du -sh /var/*
+  347  echo '' > log/development.log 
+  348  du -h log
+  349  du -h log/*
+  350  df -h
+  351  sudo du -sh /home/:
+  352  sudo du -sh /home/*
+  353  sudo du -sh /home/ec2-user/*
+  354  sudo du -sh /home/ec2-user/environment/*
+  355  sudo du -sh /home/ec2-user/environment/hrdb-web/*
+  356  sudo du -sh /home/ec2-user/environment/hrdb-web/public/*
+  357  sudo du -sh /home/ec2-user/environment/hrdb-web/public/packs/*
+  358  ls -la /home/ec2-user/environment/hrdb-web/public/packs/*
+  359  ls -la /tmp/
+  360  mkdir /tmp/packs
+  361  mv /home/ec2-user/environment/hrdb-web/public/packs/* /tmp/packs/
+  362  ls -la /home/ec2-user/environment/hrdb-web/public/packs/*
+  363  rm -r /tmp/packs
+  364  ls -la /tmp/
+  365  df -h
+  366  cd hrdb-web/
+  367  rails routes
+  368  rails console
+  369  rails routes
+  370  cd hrdb-web/
+  371  git add *
+  372  git commit -m "3/2分"
+  373  git push origin master
+  374  rails destroy scaffold user
+  375  rails destroy scaffold employee
+  376  sudo service mysqld start
+  377  rails db:migrate
+  378  cd hrdb-we
+  379  cd hrdb-web/
+  380  rails g scaffold user account:string authority:integer token:token
+  381  rails g scaffold employee employee_number:integer name:string birthday:date speciality:text memo:text user:references
+  382  rails db:migrate
+  383  rails db:rollback
+  384  rails db:migrate
+  385  mysql
+  386  history
+  387  rails destroy scaffold user
+  388  rails destroy scaffold employee
+  389  rails g migration
+  390  rails g migration drop_old_tables
+  391  rails db:migrate
+  392  rails destroy scaffold talent
+  393  rails db:migrate
+  394  rails destroy scaffold talent
+  395  rails db:migrate
+  396  rails g scaffold user account:string authority:integer token:token
+  397   rails g scaffold employee employee_number:integer name:string birthday:date speciality:text memo:text user:references
+  398  rails g scaffold talent learning_level:integer user:references skill:references
+  399  rails db:migrate
+  400  history
+  401  rails console
+  402  cd hrdb-web/
+  403  rails routs
+  404  rails routes
+  405  c
+  406  cd hrdb-web/
+  407  curl -H 'Accept: application/json"- J "Content-Type: application/json" -X GET http://localhost:8080/api/employee/3
+  408  ;
+  409  curl -H "Content-Type: application/json" -X GET http://localhost:8080/api/employee/3
+  410  rails routes
+  411  curl -X GET http://localhost:8080/api/employees/3/edit
+  412  curl -X GET http://localhost:8080/api/employees/3/edit > log.txt
+  413  vi log.txt
+  414  rails console
+  415  rails console -e test
+  416  mysql
+  417  vi log.txt
+  418  curl -X GET http://localhost:8080/api/employees
+  419  curl -X GET http://localhost:8080/api/employees > curl.log
+  420  vi curl.log
+  421  r
+  422  cd hrdb-web/
+  423  rails console
+  424  curl -X GET http://localhost:8080/api/employees/1/edit > curl.log
+  425  vi curl.log
+  426  ll
+  427  rm log.txt
+  428  rm curl.log
+  429  git add *
+  430  git commit -m "社員情報取得API作成"
+  431  git push origin master
+  432  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"employee": "employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}} http://localhost:8080/api/employees/1
+  433  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"employee": "employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1
+  434  rails routes
+  435  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": "employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1
+  436  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": "employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  437  vi curl.log
+  438  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  439  vi curl.log
+  440  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  441  vi curl.log
+  442  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  443  vi curl.log
+  444  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  445  vi curl.log
+  446  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  447  vi curl.log
+  448  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  449  vi curl.log
+  450  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  451  vi curl.log
+  452  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  453  vi curl.log
+  454  rails routes
+  455  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  456  vi curl.log
+  457  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  458  vi curl.log
+  459  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  460  vi curl.log
+  461  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  462  vi curl.log
+  463  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  464  vi curl.log
+  465  rails routes
+  466  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  467  vi curl.log
+  468  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  469  vi curl.log
+  470  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  471  vi curl.log
+  472  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  473  vi curl.log
+  474  rm curl.log
+  475  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  476  vi curl.log
+  477  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  478  vi curl.log
+  479  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  480  vi curl.log
+  481  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"id":1,"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  482  vi curl.log
+  483  rails console
+  484  curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"employee": {"id":1,"employee_number":9999, "name":"テスト 太郎","speciality":"渡仏経験ならびに渡米経験あり。","memo":""}}' http://localhost:8080/api/employees/1 > curl.log
+  485  vi curl.log
+  486  git add *
+  487  git commit -m "社員情報更新API作成"
+  488  git push origin master
+  489  cd hrdb-web/
+  490  rails console
+  491  rails routes
+  492  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://loalhost:8080/api/skill
+  493  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skill
+  494  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skill > curl.log
+  495  vi curl.log
+  496  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  497  vi curl.log
+  498  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  499  vi curl.log
+  500  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  501  vi curl.log
+  502  cd hrdb-web/
+  503  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  504  vi curl.log
+  505  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  506  vi curl.log
+  507  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  508  vi curl.log
+  509  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills
+  510  rails console
+  511  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills
+  512  rails console
+  513  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  514  vi curl.log
+  515  rails console
+  516  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  517  vi curl.log
+  518  rals console
+  519  rails console
+  520  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  521  vi curl.log
+  522  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"skill": {"skill_name":"Linux","has_learning_level":true,"skill_category_id":2}}' http://localhost:8080/api/skills > curl.log
+  523  vi curl.log
+  524  git add *
+  525  git commit -m "skill新規登録API作成"
+  526  git push origin master
+  527  cd hrdb-web/
+  528  history
+  529  curl -H "Accept: application/json" -H "Content-Type application/json" -X GET http://localhost:8080/api/skill_categories
+  530  curl -H "Accept: application/json" -H "Content-Type application/json" -X GET http://localhost:8080/api/skill_categories > curl.log
+  531  vi curl.log
+  532  curl -H "Accept: application/json" -H "Content-Type application/json" -X GET http://localhost:8080/api/skill_categories > curl.log
+  533  vi curl.log
+  534  curl -H "Accept: application/json" -H "Content-Type application/json" -X GET http://localhost:8080/api/skill_categories > curl.log
+  535  vi curl.log
+  536  git add *
+  537  git commit -m "スキルカテゴリ・スキル一覧取得API作成"
+  538  git push origin master
+  539  curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users
+  540  curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users > curl.log
+  541  vi curl.log 
+  542  rails generate migration AddTagToPosts tag:string
+  543  rails destroy AddTagToPosts
+  544  rails g migration AddPasswordToUsers password:string
+  545  rails db:migrate
+  546  curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users > curl.log
+  547  cd hrdb-web/
+  548  rails console
+  549  curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users > curl.log
+  550  vi curl.log
+  551  git add *
+  552  git commit -m "ユーザ一覧取得API作成"
+  553  git push origin master
+  554   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d {"user":{"account":"dummy","authority":2,"password":"hogehoge","emloyee":{"employee_number":8888,"name":"ダミー","id":nil}}} http://localhost:8080/api/users
+  555   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d {"user":{"account":"dummy","authority":2,"password":"hogehoge","emloyee":{"employee_number":8888,"name":"ダミー","id":nil}}} http://localhost:8080/api/users > curl.log
+  556  :q!
+  557  curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users > curl.log
+  558  vi curl.log
+  559   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","authority":2,"password":"hogehoge","emloyee":{"employee_number":8888,"name":"ダミー","id":nil}}}' http://localhost:8080/api/users > curl.log
+  560  vi curl.log 
+  561   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","authority":2,"password":"hogehoge","employee":{"employee_number":8888,"name":"ダミー","id":nil}}}' http://localhost:8080/api/users > curl.log
+  562  vi curl.log 
+  563  ll
+  564  ll c
+  565  ll c*
+  566  rm curl.log 
+  567   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","authority":2,"password":"hogehoge","employee":{"employee_number":8888,"name":"ダミー","id":nil}}}' http://localhost:8080/api/users > curl.log
+  568  vi curl.log 
+  569  rm .curl.log.swp 
+  570  vi curl.log 
+  571   curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users/1/edit
+  572   curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users/1/edit > curl.log
+  573  vi curl.log
+  574   curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users/1/edit > curl.log
+  575  vi curl.log
+  576   curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users/1/edit > curl.log
+  577  vi curl.log
+  578   curl -H "Accept: application/json" -H "Content-Type: application/json" -X GET http://localhost:8080/api/users/1/edit > curl.log
+  579  vi curl.log
+  580  git add * 
+  581  git commit -m "ユーザ編集"
+  582  git push origin master
+  583   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"id":null,"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  584  vi curl.log
+  585   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"id":null,"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  586  vi curl.log
+  587   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  588  vi curl.log 
+  589   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"id":4,"account":"dummy","password":"foobar","authority":2,"employee":{"id":4,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  590  vi curl.log 
+  591   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  592  vi curl.log 
+  593   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  594  vi curl.log 
+  595   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  596  vi curl.log 
+  597   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  598  vi curl.log 
+  599  rm curl.log 
+  600   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  601  vi curl.log 
+  602  rails console
+  603   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  604  vi curl.log
+  605   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  606  vi curl.log
+  607   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  608  vi curl.log
+  609   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  610  vi curl.log
+  611  rails console
+  612   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  613  rails console
+  614  vi curl.log
+  615  rails console
+  616   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  617  vi curl.log
+  618  rails console
+  619   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  620  rails console
+  621  vi curl.log
+  622   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  623  vi curl.log
+  624   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  625  vi curl.log
+  626   curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy","password":"foobar","authority":2,"employee":{"id":null,"employee_number":8888,"name":"ダミー"}}}' http://localhost:8080/api/users > curl.log
+  627  vi curl.log
+  628   curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"user":{"id":14,"account":"dummy","password":"foobarboo","authority":2,"employee":{"id":5,"employee_number":8888,"name":"ダミー2"}}}' http://localhost:8080/api/users/14 > curl.log
+  629  vi curl.log
+  630  git add *
+  631  git commit -m "ユーザ更新API作成"
+  632  git push origin master
+  633   curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"user":{"id":14,"account":"dummy","password":"foobarboo","authority":2,"employee":{"id":5,"employee_number":8888,"name":"ダミー2"}}}' http://localhost:8080/api/users/14 > curl.log
+  634  vi curl.log
+  635   curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"user":{"id":14,"account":"dummy","password":"foobarboo","authority":2,"employee":{"id":5,"employee_number":8888,"name":"ダミー2"}}}' http://localhost:8080/api/users/14 > curl.log
+  636  vi curl.log
+  637   curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"user":{"id":14,"account":"dummy","password":"foobarbee","authority":2,"employee":{"id":5,"employee_number":8888,"name":"ダミー2"}}}' http://localhost:8080/api/users/14 > curl.log
+  638  vi curl.log
+  639   curl -H "Accept: application/json" -H "Content-Type: application/json" -X PATCH -d '{"user":{"id":14,"account":"dummy","password":"foobarbee","authority":2,"employee_attributes":{"id":5,"employee_number":8888,"name":"ダミー2"}}}' http://localhost:8080/api/users/14 > curl.log
+  640  vi curl.log
+  641  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST '{"user":{"account":"dummy02","password":"foobar","authority":2,"employee_attributes":{"id":null,"employee_number":8887,"name":"ダミー2"}}}' http://localhost:8080/api/users>curl.log
+  642  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy02","password":"foobar","authority":2,"employee_attributes":{"id":null,"employee_number":8887,"name":"ダミー2"}}}' http://localhost:8080/api/users>curl.log
+  643  vi curl.log
+  644  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy02","password":"foobar","authority":2,"employee_attributes":{"id":null,"employee_number":8887,"name":"ダミー2"}}}' http://localhost:8080/api/users>curl.log:q!
+  645  rails console
+  646  curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST -d '{"user":{"account":"dummy03","password":"foobar","authority":2,"employee_attributes":{"id":null,"employee_number":8886,"name":"ダミー3"}}}' http://localhost:8080/api/users >curl.log
+  647  vi curl.log
+  648  rails routes
+  649  curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE  http://localhost:8080/api/users/17 >curl.log
+  650  vi curl.log
+  651  rails console
+  652  vi curl.log
+  653  curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE  http://localhost:8080/api/users/17 >curl.log
+  654  vi curl.log
+  655  curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE  http://localhost:8080/api/users/17 >curl.log
+  656  vi curl.log
+  657  curl -H "Accept: application/json" -H "Content-Type: application/json" -X DELETE -d {"user":{"id":17,"account":"dummy03","password":"foobar","authority":2,"employee":{"id":8,"employee_number":8886,"name":"ダミー3","_destroy":true}}} http://localhost:8080/api/users/17 >curl.log
+  658  vi curl.log
+  659  curl -H “Accept: application/json” -H “Content-Type: application/json” -X GET http://localhost:8080/api/users
+  660  curl -H “Accept: application/json” -H “Content-Type: application/json” -X GET http://localhost:8080/api/users > curl.log
+  661  vi curl.log
+  662  rails console
+  663  curl -H “Accept: application/json” -H “Content-Type: application/json” -X GET http://localhost:8080/api/users
+  664  git add *
+  665  git commit -m "3/5作業分#
+  666  "
+  667  git push origin master
+  668  rails routes
+  669  cd hrdb-web/
+  670  git add * 
+  671  git commit -m "3/5修正分"
+  672  git add * 
+  673  git commit -m "3/5修正分"
+  674  git add * 
+  675  git commit -m "3/5修正分"
+  676  cd git add *
+  677  cd hrdb-web/
+  678  git add *
+  679  git commit -m "3/6分"
+  680  git add *
+  681  git commit -m "3/6分"
+  682  git add *
+  683  git commit -m "3/6分"
+  684  cd hrdb-web/
+  685  ll
+  686  rm curl.log
+  687  rm curl.log\:q\! 
+  688  ll
+  689  find ./ -mtime -1
+  690  curl -X GET http://locahost:8080/api/users
+  691  curl -X GET http://localhost:8080/api/users
+  692  history
+  693  find ./ -mtime -1
+  694  history > history.log

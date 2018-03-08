@@ -23,23 +23,27 @@
 			</el-table-column>
 			<el-table-column prop="id" label="ID" width="120" sortable>
 			</el-table-column>
-			<el-table-column prop="username" label="氏名" width="120" sortable>
+			<el-table-column prop="employee.name" label="氏名" width="120" sortable>
 			</el-table-column>
 			<el-table-column prop="authority" label="権限" width="100" :formatter="formatAuthority" sortable>
 			</el-table-column>
+			<!--
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">編集</el-button>
 					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">削除</el-button>
 				</template>
 			</el-table-column>
+			-->
 		</el-table>
 
 		<!--フッター-->
+		<!--
 		<el-col :span="24" class="toolbar">
 			<el-pagination layout="prev, pager, next" @current-change="handleCurrentChange" :page-size="20" :total="total" style="float:right;">
 			</el-pagination>
 		</el-col>
+		-->
 
 		<!--編集エリア-->
 		<el-dialog title="編集" v-model="editFormVisible" :close-on-click-modal="false">
@@ -84,7 +88,7 @@
 <script>
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
-	import { getUserListPage, removeUser, batchRemoveUser, editUser, addUser } from '../../api/api';
+	import { getUserListPage, removeUser,editUser, addUser } from '../../api/api';
 
 	export default {
 		data() {
@@ -145,7 +149,7 @@
 				this.listLoading = true;
 				//NProgress.start();
 				getUserListPage(para).then((res) => {
-					this.total = res.data.total;
+					//this.total = res.data.total;
 					this.users = res.data.users;
 					this.listLoading = false;
 					//NProgress.done();
