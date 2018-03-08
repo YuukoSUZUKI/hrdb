@@ -5,17 +5,22 @@
 
 		<template>
 			<el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;"
-				>
+				@row-click="handleRowSelect">
 
 				<el-table-column type="index" width="60">
 				</el-table-column>
-		<!--
-				<el-table-column prop="id" label="ユーザID" width="120" sortable>
+				<el-table-column prop="employee.employee_number" label="社員番号" width="120" sortable>
 				</el-table-column>
-		-->
-				<el-table-column prop="authority" label="権限" width="120" sortable>
+				<el-table-column prop="employee.name" label="社員名" width="120" sortable>
+				</el-table-column>
+				<el-table-column prop="employee.speciality" label="得意領域" >
 				</el-table-column>
 
+				<el-table-column label="" width="60">
+					<template slot-scope="scope">
+						<i class="el-icon-arrow-right"></i>
+		      </template>
+				</el-table-column>
 			</el-table>
 		</template>
 
@@ -23,16 +28,6 @@
 </template>
 <script>
 	import { getUserListTest } from '../../api/api';
-	import axios from 'axios';
-	export const client = axios.create({
-    baseURL: 'http://localhost:8080',
-    timeout: 5000,
-    withCredentials:true,
-    headers: {
-      'Accept': 'application/json',
-    	'Content-Type': 'application/json',
-  	}
-	});
 
 	export default {
 		data() {
@@ -48,21 +43,13 @@
 				let para = {
 					name: ''
 				};
-				//this.loading = true;
+				this.loading = true;
 
-				//getUserListTest(para).then((res) => {
-				//getUserListTest().then((res) => {
-				//	this.users = res.data.users;
-				//	//this.loading = false;
-
-				//});
-				
-				//client.get('http://localhost:8080/api/users').then(response => {
-				client.get('https://7d1272605f7345139ac0184324cf33fa.vfs.cloud9.us-east-1.amazonaws.com/api/users').then(response => {
+				getUserListTest(para).then(response => {
 					console.log(response.status);
 					console.log(response.data);
 					this.users = response.data.users;
-					
+					this.loading = false;
 				})
 				.catch(error => {
 					if (! error.response) {
@@ -70,9 +57,13 @@
 					} else {
 						console.log(error);
 					}
+					this.loading = false;
 				})
-
-				
+			},
+			//行選択
+    	handleRowSelect(row, event, column) {
+        console.log(column);
+        this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
 			},
 		},
 		

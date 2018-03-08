@@ -7,8 +7,7 @@ class Api::UsersController < ApplicationController
   # GET /users.json
   def index
     @users = User.all
-    
-    render json:{:users=>@users , :status => 200}
+    render json:{:users=>@users, :status => 200}, include: 'employee'
   end
 
   # GET /users/1
