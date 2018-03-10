@@ -1,13 +1,11 @@
 
 <template>
 	<section>
-	  <el-button type="primary" icon="el-icon-arrow-left"  @click="goPrevious">戻る</el-button>
-	  
 	  <!-- 基本情報 -->
 	  <el-card class="box-card">
       <div slot="header" class="clearfix">
         <span class="employee-name">人財太郎</span>
-        <el-button style="float: right; padding: 3px 0" type="text">何かの操作</el-button>
+        <!--<el-button style="float: right; padding: 3px 0" type="text">何かの操作</el-button>-->
       </div>
       <el-row :gutter="20">
         <el-col :span="12">

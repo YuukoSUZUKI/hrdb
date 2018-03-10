@@ -73,11 +73,25 @@
 		    <el-button type="primary" icon="el-icon-search" @click="detailedSearch">検索</el-button>
 		  </span>
 		</el-dialog>
+		
+		<!-- 個人詳細ダイアログ -->
+		<el-dialog title="個人詳細" :visible.sync="dialogDetailVisible" >
+			<!-- 個人詳細画面のコンポーネント -->
+			<div class="employee-detail-container">
+				<employee-detail></employee-detail>
+			</div>
+		  <span slot="footer" class="dialog-footer">
+		    <el-button @click="dialogDetailVisible = false">閉じる</el-button>
+		  </span>
+		</el-dialog>
+		
 
 	</section>
 </template>
 <script>
 	import { getUserListTest ,getSkillCategoryMap} from '../../api/api';
+	//個人詳細
+	import EmployeeDetailVue from './EmployeeDetail.vue'
 
 	export default {
 		data() {
@@ -109,6 +123,8 @@
 	                              {id:'7', catName:'資格', inputVisible:false ,inputValue:'' ,items:['PMP','ITIL','Oracle Gold']},
 	                            ],
 				*/
+				//個人詳細ダイアログ表示状態
+				dialogDetailVisible: false ,
 			};
 		},
 		created:function(){
@@ -183,7 +199,9 @@
     	handleRowSelect(row, event, column) {
         console.log(column);
         console.log('現在選択しているのは'+row.employee.id);
-        this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
+        
+        this.dialogDetailVisible = true ;
+        // this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
         //this.$router.push({ path: '/sandbox', params: {id: row.employee.id}})
 			},
 		},
@@ -192,8 +210,12 @@
 			this.getUser('','');
 			//オートコンプリート
       this.links = this.loadAll();
-		}
+		},
+		// 個人詳細のコンポーネント登録(キャメルケースで登録する)
+		components: {EmployeeDetail: EmployeeDetailVue},
 	};
+
+
 
 </script>
 
@@ -206,5 +228,9 @@
 	}
 }
 
+.employee-detail-container {
+	width :600px;
+	margin : 0 auto;
+}
 
 </style>
