@@ -16,7 +16,7 @@
 		</el-col>
 
 		<!--検索結果-->
-		<el-table :data="users" highlight-current-row v-loading="listLoading" @selection-change="selsChange" style="width: 100%;">
+		<el-table :data="users" highlight-current-row v-loading="listLoading" style="width: 100%;">
 			<el-table-column type="selection" width="55">
 			</el-table-column>
 			<el-table-column type="index" width="60">
@@ -27,14 +27,14 @@
 			</el-table-column>
 			<el-table-column prop="authority" label="権限" width="100" :formatter="formatAuthority" sortable>
 			</el-table-column>
-			<!--
+			
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
 					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">編集</el-button>
-					<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">削除</el-button>
+					<!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">削除</el-button>-->
 				</template>
 			</el-table-column>
-			-->
+			
 		</el-table>
 
 		<!--フッター-->
@@ -46,7 +46,7 @@
 		-->
 
 		<!--編集エリア-->
-		<el-dialog title="編集" v-model="editFormVisible" :close-on-click-modal="false">
+		<el-dialog title="編集" :visible.sync="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="80px" :rules="editFormRules" ref="editForm">
 				<el-form-item label="氏名" prop="name">
 					<el-input v-model="editForm.name" auto-complete="off"></el-input>
@@ -65,7 +65,7 @@
 		</el-dialog>
 
 		<!--新規登録エリア-->
-		<el-dialog title="新規登録" v-model="addFormVisible" :close-on-click-modal="false">
+		<el-dialog title="新規登録" :visible.sync="addFormVisible" :center=true :close-on-click-modal="false">
 			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
 				<el-form-item label="氏名" prop="name">
 					<el-input v-model="addForm.name" auto-complete="off"></el-input>
@@ -82,6 +82,7 @@
 				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">更新</el-button>
 			</div>
 		</el-dialog>
+		
 	</section>
 </template>
 
@@ -100,7 +101,6 @@
 				total: 0,
 				page: 1,
 				listLoading: false,
-				sels: [],//テーブル選択行
 
 				editFormVisible: false,//編集エリア表示/非表示
 				editLoading: false,
@@ -237,9 +237,6 @@
 					}
 				});
 			},
-			selsChange: function (sels) {
-				this.sels = sels;
-			}
 		},
 		mounted() {
 			this.getUsers();
