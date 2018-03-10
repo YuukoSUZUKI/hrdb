@@ -64,3 +64,8 @@ gem 'foreman'
 
 # 暗号化
 gem 'bcrypt','~> 3.1.7'
+
+#DB参照用
+group :development do
+    gem 'rails_db'
+end
