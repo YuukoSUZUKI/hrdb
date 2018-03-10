@@ -5,7 +5,7 @@
 				<!--
 				{{collapsed?'':sysName}}
 				-->
-				<i class="el-icon-search"></i>mel
+				<i class="el-icon-search"></i>meru
 			</el-col>
 			<el-col :span="10">
 				<!-- メニューを仕舞うボタンで表示が崩れるので、解消するまで非表示
@@ -150,13 +150,10 @@
 		.header {
 			height: 60px;
 			line-height: 60px;
-			/* background: #2bc1d1; */
-			
-			background: #1FA2FF;  /* fallback for old browsers */
-			background: -webkit-linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF);  /* Chrome 10-25, Safari 5.1-6 */
-			background: linear-gradient(to right, #A6FFCB, #12D8FA, #1FA2FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-  
+			background: #1FA2FF;  /* fallback for old browsers */
+			background: linear-gradient(to right, rgba(166, 255, 203, 1), rgba(18, 216, 250, 1), rgba(31, 162, 255, 1)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
 			color:#fff;
 			.userinfo {
 				text-align: right;
@@ -202,6 +199,8 @@
 				border-color: rgba(238,241,146,0.3);
 				border-right-width: 1px;
 				border-right-style: solid;
+	      		color: #505458;
+
 				img {
 					width: 40px;
 					float: left;

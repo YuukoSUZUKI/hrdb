@@ -5,6 +5,7 @@ class Api::SkillCategoriesController < ApplicationController
   # GET /skill_categories.json
   def index
     @skill_categories = SkillCategory.order(:sort_order)
+    render json:{:skill_categories => @skill_categories, :status => 200}, include: 'skills'
   end
 
   # GET /skill_categories/1

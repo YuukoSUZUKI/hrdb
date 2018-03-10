@@ -9,6 +9,7 @@
     "element-ui": "^2.2.0",
     "font-awesome": "^4.7.0",
     "mockjs": "^1.0.1-beta3",
+    "url-loader": "^1.0.1",
     "vue": "^2.5.13",
     "vue-loader": "^14.1.1",
     "vue-router": "^3.0.1",

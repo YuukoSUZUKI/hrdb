@@ -7,6 +7,7 @@ class Api::EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
+    render json:{:employee=>@employee, :status => 200}, include: 'talents'
   end
 
   # 編集 指定idの社員情報を検索して、画面側にrender

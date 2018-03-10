@@ -14,6 +14,15 @@ class Api::UsersController < ApplicationController
   # GET /users/1.json
   def show
   end
+  
+  #PUT
+  def searchSimple
+    #@users = User.has_skill_ids_are(search_params[:skills])
+    #render json:{:users => @users, :status => 200}, include: ['employee','talents']
+    
+    @users = User.has_employee_name_like(search_params[:name])
+    render json:{:users => @users, :status => 200}, include: 'employee'
+  end
 
   # GET /users/new
   def new
@@ -78,5 +87,9 @@ class Api::UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:account, :password,:authority,  employee_attributes: [:employee_number, :name,:id,:_destroy])
     end
-
+    
+    #検索用パラメータ
+    def search_params
+      params.permit(:name, :skills=>[])
+    end
 end

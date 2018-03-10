@@ -15,5 +15,6 @@ Rails.application.routes.draw do
     resources :user_details, only: [:show, :edit, :update]
     resources :employees, only: [:show, :edit, :update, :create]
     
+    get 'user/list', to: 'users#searchSimple', controller: 'users'
   end
 end

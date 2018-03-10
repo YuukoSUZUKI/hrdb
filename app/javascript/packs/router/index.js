@@ -5,7 +5,8 @@ import Home from '../views/Home.vue'
 import Main from '../views/Main.vue'
 import UserManage from '../views/skill/UserManage.vue'
 import Form from '../views/skill/Form.vue'
-import user from '../views/skill/user.vue'
+import user from '../views/skill/User.vue'
+import userMock from '../views/skill/userMock.vue'
 import EmployeeDetail from '../views/skill/EmployeeDetail.vue'
 // import Page4 from '../views/nav2/Page4.vue'
 import Page5 from '../views/nav2/Page5.vue'
@@ -56,7 +57,8 @@ let routes = [
         name: 'そのた',
         iconCls: 'el-icon-message',
         children: [
-            { path: '/sandbox', component: Sandbox, name: 'お砂場' }
+            { path: '/userMock', component: userMock, name: 'Mock版スキル検索' },
+            { path: '/sandbox', component: Sandbox, name: 'お砂場' },
         ]
     },
 
