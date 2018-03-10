@@ -65,7 +65,10 @@ gem 'foreman'
 # 暗号化
 gem 'bcrypt','~> 3.1.7'
 
-#DB参照用
+#DBテストデータ用
 group :development do
+    #DBのGUI
     gem 'rails_db'
+    #DBデータから seeds.rb リバース生成
+    gem 'seed_dump'
 end
