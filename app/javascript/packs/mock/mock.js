@@ -8,7 +8,7 @@ export default {
    * mock bootstrap
    */
   bootstrap() {
-    let mock = new MockAdapter(axios);
+    let mock = new MockAdapter(axios, { delayResponse: 500 });
 
     // mock success request
     mock.onGet('/success').reply(200, {

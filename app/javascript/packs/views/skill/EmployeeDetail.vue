@@ -6,16 +6,16 @@
   	<section>
 
 	  <!-- 基本情報 -->
-	  <el-card class="box-card">
+	  <el-card class="box-card" v-loading="loading">
       <div slot="header" class="clearfix">
-        <span class="employee-name">人財太郎</span>
+        <span class="employee-name">{{name}}</span>
         <!--<el-button style="float: right; padding: 3px 0" type="text">何かの操作</el-button>-->
       </div>
       <el-row :gutter="20">
         <el-col :span="12">
           <div class="item label">社員No.</div>
           <div class="text content">
-            {{employee_id}}
+            {{employee_number}}
           </div>
         </el-col>
         <el-col :span="12">
@@ -29,8 +29,6 @@
         <el-col :span="24">
           <div class="text label">得意領域</div>
           <div class="text content">
-            JavaでのWeb開発、BtoCサイトのディレクション<br>
-            アーキテクト
             {{speciality}}
           </div>
         </el-col>
@@ -39,7 +37,6 @@
         <el-col :span="24">
           <div class="text label">特記事項</div>
           <div class="text content">
-            最近眼精疲労で長時間の作業が厳しい
             {{memo}}
           </div>
         </el-col>
@@ -48,14 +45,14 @@
 	  
 	  <!-- スキルタグ -->
 	  <el-collapse v-model="activeNames">
-      <el-collapse-item v-for="(category, key, index) in dynamicCategories" 
-          :key="category.id" :title="category.name" :name="category.id">
+      <el-collapse-item v-for="(category, key, index) in skillCategories" 
+          :key="category.id" :title="category.skill_category_name" :name="category.id">
         <el-tag
-          :key="tag"
-          v-for="tag in category.items"
+          :key="skill.id"
+          v-for="skill in category.skills"
           :disable-transitions="false"
           >
-          {{tag}}
+          {{skill.skill_name}}
         </el-tag>
       </el-collapse-item>
     </el-collapse>
@@ -71,36 +68,71 @@
 
 
 <script>
+	import { getEmployee } from '../../api/api';
+	
   export default {
     props: ['employee_id' , 'dialogVisible'],
-    data() {
+    data: function() {
       return {
+        name: '',
+        employee_number: '',
         age: '',
         speciality: '',
         memo: '',
-        //アコーディオンとタグのデータ
-        dynamicCategories: [ {id:'1',name:'言語', items:['java','C#','PHP','VB']},
-                              {id:'2', name:'フレームワーク',  items:['spring','struts2','cakePHP','.net','iBatis','dbflute']},
-                              {id:'3', name:'OS・DB・ミドルウェア', items:['Linux','Oracle','MySQL','postgresql','Apache','Tomcat','redis','memcached']},
-                              {id:'4', name:'業種', items:['人材紹介','保険代理店','小売','流通','不動産']},
-                              {id:'5', name:'ポジション', items:['PM','サブリーダー']},
-                              {id:'6', name:'フェーズ', items:['要件定義','基本設計(外部設計)','詳細設計(内部設計)','結合テスト','総合テスト']},
-                              {id:'7', name:'資格', items:['PMP','ITIL','Oracle Gold']},
+        //アコーディオンとタグのデータ(モック時の初期値)
+        skillCategories: [ {id:'1',skill_category_name:'言語', skills:[{skill_name:'java'},{skill_name:'C#'},{skill_name:'PHP'},{skill_name:'VB'}]},
+                              {id:'2', skill_category_name:'フレームワーク',  skills:[{skill_name:'spring'},{skill_name:'struts2'},{skill_name:'cakePHP'},{skill_name:'.net'},{skill_name:'iBatis'},{skill_name:'dbflute'}]},
+                              {id:'3', skill_category_name:'OS・DB・ミドルウェア', skills:[{skill_name:'Linux'},{skill_name:'Oracle'},{skill_name:'MySQL'},{skill_name:'postgresql'},{skill_name:'Apache'},{skill_name:'Tomcat'},{skill_name:'redis'},{skill_name:'memcached'}]},
+                              {id:'4', skill_category_name:'業種', skills:[{skill_name:'人材紹介'},{skill_name:'保険代理店'},{skill_name:'小売'},{skill_name:'流通'},{skill_name:'不動産'}]},
+                              {id:'5', skill_category_name:'ポジション', skills:[{skill_name:'PM'},{skill_name:'サブリーダー'}]},
+                              {id:'6', skill_category_name:'フェーズ', skills:[{skill_name:'要件定義'},{skill_name:'基本設計(外部設計)'},{skill_name:'詳細設計(内部設計)'},{skill_name:'結合テスト'},{skill_name:'総合テスト'}]},
+                              {id:'7', skill_category_name:'資格', skills:[{skill_name:'PMP'},{skill_name:'ITIL'},{skill_name:'Oracle Gold'}]},
                             ],
         //アコーディオンを最初から全て展開する
-        activeNames: ['1','2','3','4','5','6','7'],
-        
+        activeNames: [],
+        //ローディングアイコン
+        loading: false,
       };
     },
     methods: {
-      getEmployeeDetail(){
-  		  console.log('updated' + this.employee_id);
-        this.memo = this.employee_id ;
+      handleOpen:function(){
+        this.loading = true; //ローディングアイコン
+        //employee_idをキーに個人詳細情報を取得
+        var vueInstance = this ;
+				getEmployee(this.employee_id).then(response => {
+				  //APIの結果を画面にセット
+					vueInstance.name = response.data.name;
+					vueInstance.employee_number = response.data.employee_number;
+					vueInstance.speciality = response.data.speciality;
+					vueInstance.memo = response.data.memo;
+					//スキル階層
+					vueInstance.skillCategories = response.data.skill_categories;
+					
+					response.data.skill_categories.forEach(function(category){
+						console.log('activeNames'+ category.id)
+					  vueInstance.activeNames.push(category.id);
+					});
+					vueInstance.loading = false;
+				})
+				.catch(error => {
+					if (! error.response) {
+						console.log('error: network error.')
+					} else {
+						console.log(error);
+					}
+					vueInstance.loading = false;
+				})
       },
-      handleOpen(){
-        //個人詳細情報を取得
-      },
-      handleClose(){
+      //ダイアログを閉じる処理
+      handleClose: function(){
+        //モデルを初期化
+        this.name= '',
+        this.employee_number= '',
+        this.age= '',
+        this.speciality= '',
+        this.memo= '',
+        this.skillCategories=[];
+
         //親コンポーネントへダイアログが閉じたことを通知
         this.$emit('update:dialogVisible', false)
       },

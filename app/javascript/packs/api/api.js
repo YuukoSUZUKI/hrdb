@@ -18,7 +18,7 @@ export const getUserList = params => { return axios.get(`${base}/user/list`, { p
 
 export const getUserListTest = params => { return client.get(`${base}/api/user/list`, { params: params }); }; 
 export const getSkillCategoryMap = params => {return client.get(`${base}/api/skill_categories`);};
-export const getEmployee = params => {return client.get(`${base}/api/employee`, { params: params }); }; 
+export const getEmployee = employee_id => {return client.get(`${base}/api/employees/` + employee_id); }; 
 
 export const getUserListPage = params => { return axios.get(`${base}/user/listpage`, { params: params }); };
 

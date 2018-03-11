@@ -7,7 +7,28 @@ class Api::EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-    render json:{:employee=>@employee, :status => 200}, include: ['user','talents']
+    
+    #保有スキル一覧を取得し カテゴリ>スキル の構造にする
+    categories = []
+    SkillCategory.all.order('sort_order').each do |category|
+      item = {id:category.id , skill_category_name:category.skill_category_name , skills:[]}
+      skillArray = []
+      Skill.has_user_id_in_category(@employee.user.id,category).each do |skill|
+        sk = {id:skill.id , skill_name:skill.skill_name}
+        skillArray.push(sk)
+      end
+      item["skills"] = skillArray
+      categories.push(item)
+    end    
+    
+    render json:{ employee_number: @employee.employee_number,
+                  name: @employee.name, 
+                  speciality: @employee.speciality, 
+                  memo: @employee.memo ,
+                  skill_categories:categories } 
+    
+    # 
+    # render json:{:employee=>@employee, :status => 200}, include: ['user','talents','skill']
   end
 
   # 編集 指定idの社員情報を検索して、画面側にrender
