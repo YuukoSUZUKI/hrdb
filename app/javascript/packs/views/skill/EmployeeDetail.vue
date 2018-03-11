@@ -1,6 +1,6 @@
 
 <template>
-	<el-dialog title="個人詳細" :visible="dialogVisible" @open="handleOpen" @close="handleClose">
+	<el-dialog title="個人詳細" :visible="dialogVisible" @open="handleOpen" @close="handleClose" custom-class="dialog-detail">
 		<!-- 個人詳細画面のコンポーネント -->
 		<div class="employee-detail-container">
   	<section>
@@ -42,20 +42,29 @@
         </el-col>
       </el-row>      
     </el-card>
-	  
-	  <!-- スキルタグ -->
-	  <el-collapse v-model="activeNames">
-      <el-collapse-item v-for="(category, key, index) in skillCategories" 
-          :key="category.id" :title="category.skill_category_name" :name="category.id">
-        <el-tag
-          :key="skill.id"
-          v-for="skill in category.skills"
-          :disable-transitions="false"
-          >
-          {{skill.skill_name}}
-        </el-tag>
-      </el-collapse-item>
-    </el-collapse>
+    <el-tabs type="border-card" v-model="activeTabName" class="detail-tabs">
+      <el-tab-pane label="保有スキル" name="skill">
+        <!-- スキルタグ -->
+    	  <el-collapse v-model="activeNames">
+          <el-collapse-item v-for="(category, key, index) in skillCategories" 
+              :key="category.id" :name="category.id">
+            <template slot="title">
+              {{category.skill_category_name}} <el-tag size="mini" type="info" class="skill-count">{{category.skills.length}}</el-tag>
+            </template>
+            <el-tag
+              :key="skill.id"
+              v-for="skill in category.skills"
+              :disable-transitions="false"
+              >
+              {{skill.skill_name}}
+            </el-tag>
+          </el-collapse-item>
+        </el-collapse>
+      </el-tab-pane>
+      <el-tab-pane label="職務経歴" name="history">
+        TODO 職務経歴を表示する
+      </el-tab-pane>
+	  </el-tabs>
 
 	</section>
 	</div>
@@ -90,6 +99,7 @@
                             ],
         //アコーディオンを最初から全て展開する
         activeNames: [],
+        activeTabName: 'skill',
         //ローディングアイコン
         loading: false,
       };
@@ -132,6 +142,8 @@
         this.speciality= '',
         this.memo= '',
         this.skillCategories=[];
+        this.activeNames= [];
+        this.activeTabName= 'skill';
 
         //親コンポーネントへダイアログが閉じたことを通知
         this.$emit('update:dialogVisible', false)
@@ -141,6 +153,9 @@
 </script>
 
 <style scoped lang="scss">
+  .dialog-detail {
+	  min-width :650px;
+  }
   .employee-detail-container {
   	width :600px;
   	margin : 0 auto;
@@ -178,7 +193,10 @@
   .clearfix:after {
     clear: both
   }
-
+/* スキル数のバッジ*/
+  .skill-count {
+    margin-left:0.5rem;
+  }
 /* タグのスタイル */
   .el-tag + .el-tag {
     margin-left: 10px;
@@ -194,5 +212,8 @@
     width: 90px;
     margin-left: 10px;
     vertical-align: bottom;
+  }
+  .detail-tabs {
+    margin-top:2em;
   }
 </style>

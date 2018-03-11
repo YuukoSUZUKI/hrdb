@@ -15,14 +15,54 @@ class Api::UsersController < ApplicationController
   def show
   end
   
-  #PUT
+  #GET /user/list
+  # def searchSimple
+  #   @users = User.has_employee_name_like(search_params[:name])
+  #   render json:{:users => @users, :status => 200}, include: 'employee'
+  # end
   def searchSimple
-    #@users = User.has_skill_ids_are(search_params[:skills])
-    #render json:{:users => @users, :status => 200}, include: ['employee','talents']
+    # TODO ファットコントローラー、SQL直書き力技 時間あればいい方法に置き換える
+    # SQL直書きの恩恵もあるかも(sql関数大文字小文字吸収・列横断のあいまい検索の要件に対応)
+    sql = "SELECT employees.*,
+                  employees.id as employee_id
+                  FROM users
+                    LEFT OUTER JOIN employees
+                      ON employees.user_id = users.id
+                  WHERE 1=1 "
+    #氏名部分一致
+    employee_name_like = nil
+    if search_params[:name].present? 
+      sql.concat(" AND employees.name like :employee_name ")
+      employee_name_like = "%" + search_params[:name] + "%"
+    end
     
-    @users = User.has_employee_name_like(search_params[:name])
-    render json:{:users => @users, :status => 200}, include: 'employee'
+    #指定された保有スキルを全て持っているユーザを絞り込む
+    skill_ids = nil
+    skill_count = nil
+    if search_params[:skills].present? 
+        logger.debug('present')
+        sql.concat(" AND users.id in (select talents.user_id from talents 
+                                      WHERE talents.skill_id in ( :skill_id )
+                                      group by talents.user_id 
+                                      having count(distinct talents.skill_id) = :count ) ")
+        skill_ids = search_params[:skills]
+        skill_count = search_params[:skills].length
+    end
+    #sql サニタイズ
+    sanitizedSql = ActiveRecord::Base.send(
+      :sanitize_sql_array,
+      [
+        sql,
+        employee_name: employee_name_like,
+        skill_id: skill_ids ,
+        count: skill_count ,
+      ]
+    )
+    #クエリ実行
+    result = ActiveRecord::Base.connection.select_all(sanitizedSql)
+    render json:{:users => result, :status => 200}
   end
+
 
   # GET /users/new
   def new

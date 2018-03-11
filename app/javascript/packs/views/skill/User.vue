@@ -31,11 +31,11 @@
 
 				<el-table-column type="index" width="60">
 				</el-table-column>
-				<el-table-column prop="employee.employee_number" label="社員番号" width="120" sortable>
+				<el-table-column prop="employee_number" label="社員番号" width="120" sortable>
 				</el-table-column>
-				<el-table-column prop="employee.name" label="社員名" width="120" sortable>
+				<el-table-column prop="name" label="社員名" width="120" sortable>
 				</el-table-column>
-				<el-table-column prop="employee.speciality" label="得意領域" >
+				<el-table-column prop="speciality" label="得意領域" >
 				</el-table-column>
 
 				<el-table-column label="" width="60">
@@ -192,10 +192,10 @@
 			//行選択
     	handleRowSelect(row, event, column) {
         console.log(column);
-        console.log('現在選択しているのは'+row.employee.id);
+        console.log('現在選択しているのは'+row.employee_id);
         
         this.dialogDetailVisible = true ;
-        this.selectedEmployeeId = row.employee.id ;
+        this.selectedEmployeeId = row.employee_id ;
         // this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
         //this.$router.push({ path: '/sandbox', params: {id: row.employee.id}})
 			},
@@ -217,6 +217,7 @@
 <style scoped lang="scss">
 
 .dialog-search {
+	min-width :650px;
 	form {
 		overflow-y : scroll;
 		height :  350px;
