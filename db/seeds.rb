@@ -97,11 +97,11 @@ User.create!([
   {id:5, account: "m-yokoyama", authority: 2, token: "5", password: "password"}
 ])
 Employee.create!([
-  {employee_number: 100, name: "加藤", birthday: "1980-01-01", speciality: "javaのWEB開発", memo: "", user_id: 1},
-  {employee_number: 200, name: "鈴木", birthday: "1980-02-01", speciality: "C#のWEB開発", memo: "", user_id: 2},
-  {employee_number: 300, name: "山下", birthday: "1980-03-01", speciality: "PMO", memo: "", user_id: 3},
-  {employee_number: 400, name: "後藤", birthday: "1980-04-01", speciality: ".net", memo: "", user_id: 4},
-  {employee_number: 500, name: "横山", birthday: "1980-05-01", speciality: "python", memo: "", user_id: 5},
+  {employee_number: 100, name: "加藤太郎", birthday: "1980-01-01", speciality: "javaのWEB開発", memo: "最近眼精疲労", user_id: 1},
+  {employee_number: 200, name: "鈴木花子", birthday: "1980-02-01", speciality: "C#のWEB開発", memo: "暑がり", user_id: 2},
+  {employee_number: 300, name: "山下次郎", birthday: "1980-03-01", speciality: "PMO", memo: "本社業務あり", user_id: 3},
+  {employee_number: 400, name: "後藤武", birthday: "1980-04-01", speciality: ".net", memo: "", user_id: 4},
+  {employee_number: 500, name: "横山花子", birthday: "1980-05-01", speciality: "python", memo: "", user_id: 5},
 ])
 Talent.create!([
   {learning_level: 1, user_id: 1, skill_id: 1},
