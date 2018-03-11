@@ -37,8 +37,8 @@ let routes = [
         children: [
             { path: '/main', component: Main, name: 'メイン', hidden: true },
             { path: '/user', component: user, name: 'スキル検索' },
-            { path: '/form', component: Form, name: 'スキルシート編集' },
-            { path: '/editEmployee/1/edit', component:EditEmployee, name:'社員情報編集'}, // TODO:仮に固定値を入れる。本当はログインユーザのIDを入れる。
+            // { path: '/form', component: Form, name: 'スキルシート編集' },
+            { path: '/editEmployee/1/edit', component:EditEmployee, name:'スキルシート編集'}, // TODO:仮に固定値を入れる。本当はログインユーザのIDを入れる。
         ]
     },
     {
@@ -50,16 +50,16 @@ let routes = [
             { path: '/table', component: UserManage, name: 'ユーザ管理' },
         ]
     },
-    {
-        path: '/',
-        component: Home,
-        name: 'そのた',
-        iconCls: 'el-icon-message',
-        children: [
-            { path: '/userMock', component: userMock, name: 'Mock版スキル検索' },
-            { path: '/sandbox', component: Sandbox, name: 'お砂場' },
-        ]
-    },
+    // {
+    //     path: '/',
+    //     component: Home,
+    //     name: 'そのた',
+    //     iconCls: 'el-icon-message',
+    //     children: [
+    //         { path: '/userMock', component: userMock, name: 'Mock版スキル検索' },
+    //         { path: '/sandbox', component: Sandbox, name: 'お砂場' },
+    //     ]
+    // },
 
     
     // {

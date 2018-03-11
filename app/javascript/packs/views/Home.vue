@@ -199,7 +199,13 @@
 				border-color: rgba(238,241,146,0.3);
 				border-right-width: 1px;
 				border-right-style: solid;
-	      		color: #505458;
+	      color: #606266;
+	      
+		    .subtitle {
+		      display : block;
+		      font-size : 12px;
+		      margin-top : 0.5rem;
+		    }
 
 				img {
 					width: 40px;
