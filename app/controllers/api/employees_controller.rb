@@ -7,7 +7,7 @@ class Api::EmployeesController < ApplicationController
   # GET /employees/1
   # GET /employees/1.json
   def show
-    render json:{:employee=>@employee, :status => 200}, include: 'talents'
+    render json:{:employee=>@employee, :status => 200}, include: ['user','talents']
   end
 
   # 編集 指定idの社員情報を検索して、画面側にrender
@@ -44,7 +44,7 @@ class Api::EmployeesController < ApplicationController
     # 社員情報を変数に設定
     def set_employee
       @employee = Employee.find(params[:id])
-      @talents = Talent.find(user_id: @employee.user_id)
+      # @talents = Talent.where(user_id: @employee.user_id)
     end
 
     #社員パラメータ
