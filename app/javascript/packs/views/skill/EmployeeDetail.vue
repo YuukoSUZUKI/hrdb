@@ -1,6 +1,10 @@
 
 <template>
-	<section>
+	<el-dialog title="個人詳細" :visible="dialogVisible" @open="handleOpen" @close="handleClose">
+		<!-- 個人詳細画面のコンポーネント -->
+		<div class="employee-detail-container">
+  	<section>
+
 	  <!-- 基本情報 -->
 	  <el-card class="box-card">
       <div slot="header" class="clearfix">
@@ -11,13 +15,13 @@
         <el-col :span="12">
           <div class="item label">社員No.</div>
           <div class="text content">
-            440
+            {{employee_id}}
           </div>
         </el-col>
         <el-col :span="12">
           <div class="text label">年齢</div>
           <div class="text content">
-            37
+            {{age}}
           </div>
         </el-col>
       </el-row>
@@ -27,6 +31,7 @@
           <div class="text content">
             JavaでのWeb開発、BtoCサイトのディレクション<br>
             アーキテクト
+            {{speciality}}
           </div>
         </el-col>
       </el-row>      
@@ -35,6 +40,7 @@
           <div class="text label">特記事項</div>
           <div class="text content">
             最近眼精疲労で長時間の作業が厳しい
+            {{memo}}
           </div>
         </el-col>
       </el-row>      
@@ -55,13 +61,23 @@
     </el-collapse>
 
 	</section>
+	</div>
+  <span slot="footer" class="dialog-footer">
+    <el-button @click="handleClose">閉じる</el-button>
+  </span>
+</el-dialog>
+
 </template>
 
 
 <script>
   export default {
+    props: ['employee_id' , 'dialogVisible'],
     data() {
       return {
+        age: '',
+        speciality: '',
+        memo: '',
         //アコーディオンとタグのデータ
         dynamicCategories: [ {id:'1',name:'言語', items:['java','C#','PHP','VB']},
                               {id:'2', name:'フレームワーク',  items:['spring','struts2','cakePHP','.net','iBatis','dbflute']},
@@ -77,14 +93,26 @@
       };
     },
     methods: {
-      goPrevious(){
-        this.$router.go(-1);
+      getEmployeeDetail(){
+  		  console.log('updated' + this.employee_id);
+        this.memo = this.employee_id ;
       },
-    }
+      handleOpen(){
+        //個人詳細情報を取得
+      },
+      handleClose(){
+        //親コンポーネントへダイアログが閉じたことを通知
+        this.$emit('update:dialogVisible', false)
+      },
+    },
   }
 </script>
 
 <style scoped lang="scss">
+  .employee-detail-container {
+  	width :600px;
+  	margin : 0 auto;
+  }
 /* 基本情報カードのスタイル */
   .box-card {
     width: 600px;

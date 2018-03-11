@@ -51,7 +51,7 @@
 		<el-dialog title="スキル詳細検索" :visible.sync="dialogFormVisible" :center=true custom-class="dialog-search">
 		  <el-form :model="detailform" label-position="left">
 		    <el-form-item label="氏名" :label-width="formLabelWidth">
-		      <el-input v-model="detailform.name" auto-complete="off"></el-input>
+		      <el-input v-model="detailform.name" auto-complete="off" clearable></el-input>
 		    </el-form-item>
 				  <el-checkbox-group v-model="detailform.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
 			  	  <!-- スキルタグ -->
@@ -75,15 +75,8 @@
 		</el-dialog>
 		
 		<!-- 個人詳細ダイアログ -->
-		<el-dialog title="個人詳細" :visible.sync="dialogDetailVisible" >
-			<!-- 個人詳細画面のコンポーネント -->
-			<div class="employee-detail-container">
-				<employee-detail></employee-detail>
-			</div>
-		  <span slot="footer" class="dialog-footer">
-		    <el-button @click="dialogDetailVisible = false">閉じる</el-button>
-		  </span>
-		</el-dialog>
+		<employee-detail :dialogVisible.sync="dialogDetailVisible" :employee_id="selectedEmployeeId" ></employee-detail>
+
 		
 
 	</section>
@@ -125,6 +118,7 @@
 				*/
 				//個人詳細ダイアログ表示状態
 				dialogDetailVisible: false ,
+				selectedEmployeeId:'',
 			};
 		},
 		created:function(){
@@ -201,6 +195,7 @@
         console.log('現在選択しているのは'+row.employee.id);
         
         this.dialogDetailVisible = true ;
+        this.selectedEmployeeId = row.employee.id ;
         // this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
         //this.$router.push({ path: '/sandbox', params: {id: row.employee.id}})
 			},
@@ -227,10 +222,4 @@
 		height :  350px;
 	}
 }
-
-.employee-detail-container {
-	width :600px;
-	margin : 0 auto;
-}
-
 </style>
