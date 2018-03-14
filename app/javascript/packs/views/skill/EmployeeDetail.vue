@@ -1,6 +1,6 @@
 
 <template>
-	<el-dialog title="個人詳細" :visible="dialogVisible" @open="handleOpen" @close="handleClose" custom-class="dialog-detail">
+	<el-dialog title="個人詳細" :visible="dialogVisible" @open="handleOpen" @close="handleClose" width="650px">
 		<!-- 個人詳細画面のコンポーネント -->
 		<div class="employee-detail-container">
   	<section>
@@ -153,9 +153,6 @@
 </script>
 
 <style scoped lang="scss">
-  .dialog-detail {
-	  min-width :650px;
-  }
   .employee-detail-container {
   	width :600px;
   	margin : 0 auto;

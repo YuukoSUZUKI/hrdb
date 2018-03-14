@@ -48,7 +48,7 @@
 
 
 		<!-- 詳細検索ダイアログ -->
-		<el-dialog title="スキル詳細検索" :visible.sync="dialogFormVisible" :center=true custom-class="dialog-search">
+		<el-dialog title="スキル詳細検索" :visible.sync="dialogFormVisible" :center=true class="dialog-search" width="650px">
 		  <el-form :model="detailform" label-position="left">
 		    <el-form-item label="氏名" :label-width="formLabelWidth">
 		      <el-input v-model="detailform.name" auto-complete="off" clearable></el-input>
@@ -217,7 +217,6 @@
 <style scoped lang="scss">
 
 .dialog-search {
-	min-width :650px;
 	form {
 		overflow-y : scroll;
 		height :  350px;
