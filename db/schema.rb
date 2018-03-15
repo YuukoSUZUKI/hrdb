@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20180313000000) do
   create_table "skill_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "skill_category_name"
     t.integer "sort_order"
+    t.boolean "enabled_input"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

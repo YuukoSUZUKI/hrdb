@@ -90,7 +90,6 @@
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
 	import { getUserListPage, removeUser,editUser, addUser } from '../../api/api';
-
 	export default {
 		data() {
 			return {
@@ -101,7 +100,6 @@
 				total: 0,
 				page: 1,
 				listLoading: false,
-
 				editFormVisible: false,//編集エリア表示/非表示
 				editLoading: false,
 				editFormRules: {
@@ -115,7 +113,6 @@
 					name: '',
 					authority: -1,
 				},
-
 				addFormVisible: false,//新規エリア表示/非表示
 				addLoading: false,
 				addFormRules: {
@@ -173,7 +170,6 @@
 						this.getUsers();
 					});
 				}).catch(() => {
-
 				});
 			},
 			//編集画面を表示する
@@ -242,9 +238,7 @@
 			this.getUsers();
 		}
 	}
-
 </script>
 
 <style scoped>
-
 </style>

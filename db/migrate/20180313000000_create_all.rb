@@ -1,4 +1,4 @@
-class DropOldTables < ActiveRecord::Migration[5.1]
+class CreateAll < ActiveRecord::Migration[5.1]
   def change
     create_table "employees", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.integer "employee_number"
@@ -15,6 +15,7 @@ class DropOldTables < ActiveRecord::Migration[5.1]
     create_table "skill_categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
       t.string "skill_category_name"
       t.integer "sort_order"
+      t.boolean "enabled_input"
       t.datetime "created_at", null: false
       t.datetime "updated_at", null: false
     end

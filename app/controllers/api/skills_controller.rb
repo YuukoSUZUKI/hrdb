@@ -19,21 +19,21 @@ class Api::SkillsController < ApplicationController
     @exist = Skill.where(skill_category_id: skill_params[:skill_category_id]).where(skill_name: skill_params[:skill_name])
 
     @skill = Skill.new(skill_params)
+    @skill.has_learning_level=true
+    
+    logger.debug("skill")
+    logger.debug(@skill)
 
-    respond_to do |format|
-      if @exist.present? 
-        format.html { render :new }
-        format.json { render json: @skill.errors, status: :unprocessable_entity }
+    if @exist.present? 
+      render json:{errors: 'already exists.', status: :unprocessable_entity }
+    else
+      if @skill.save
+        render json:{skill: @skill}
       else
-        if @skill.save
-          format.html { redirect_to api_skill_url(@skill), notice: 'スキルを追加しました' }
-          format.json { render :show, status: :created }
-        else
-          format.html { render :new }
-          format.json { render json: @skill.errors, status: :unprocessable_entity }
-        end
+        render json:{errors: @skill.errors, status: :unprocessable_entity }
       end
     end
+
   end
 
   private
@@ -44,6 +44,6 @@ class Api::SkillsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def skill_params
-      params.require(:skill).permit(:skill_name, :has_learning_level, :skill_category_id)
+      params.require(:skill).permit(:skill_name, :skill_category_id)
     end
 end

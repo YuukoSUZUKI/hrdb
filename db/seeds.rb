@@ -1,12 +1,12 @@
 
 SkillCategory.create!([
-  {id:1, skill_category_name: "言語", sort_order: 1},
-  {id:2, skill_category_name: "フレームワーク", sort_order: 2},
-  {id:3, skill_category_name: "OS・DB・ミドルウェア", sort_order: 3},
-  {id:4, skill_category_name: "業種", sort_order: 4},
-  {id:5, skill_category_name: "ポジション", sort_order: 5},
-  {id:6, skill_category_name: "フェーズ", sort_order: 6},
-  {id:7, skill_category_name: "資格", sort_order: 7}
+  {id:1, skill_category_name: "言語", sort_order: 1, enabled_input: true},
+  {id:2, skill_category_name: "フレームワーク", sort_order: 2, enabled_input: true},
+  {id:3, skill_category_name: "OS・DB・ミドルウェア", sort_order: 3, enabled_input: true},
+  {id:4, skill_category_name: "業種", sort_order: 4, enabled_input: false},
+  {id:5, skill_category_name: "ポジション", sort_order: 5, enabled_input: false},
+  {id:6, skill_category_name: "フェーズ", sort_order: 6, enabled_input: false},
+  {id:7, skill_category_name: "資格", sort_order: 7, enabled_input: true}
 ])
 Skill.create!([
   {skill_name: "java", has_learning_level: true, skill_category_id: 1},

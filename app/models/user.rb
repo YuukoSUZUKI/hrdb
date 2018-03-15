@@ -10,9 +10,8 @@ class User < ApplicationRecord
   scope :has_employee_name_like, -> employee_name {
     joins(:employee).merge(Employee.name_like employee_name)
   }
-   
+  
   scope :has_skill_ids_are, -> ids {
     joins(:talents).merge(Talent.skill_ids_are, ids)
-  }
-  
+  } 
 end
