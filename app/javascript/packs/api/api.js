@@ -21,6 +21,7 @@ export const getSkillCategoryMap = params => {return client.get(`${base}/api/ski
 export const getEmployee = employee_id => {return client.get(`${base}/api/employees/` + employee_id); }; 
 export const editEmployee = employee_id => {return client.get(`${base}/api/employees/` + employee_id + `/edit`); };
 export const createSkill = skill => {return client.post(`${base}/api/skills`, skill); };
+export const updateEmployee = employee => {return client.patch(`${base}/api/employees/` + employee.id, employee); }; 
 
 export const getUserListPage = params => { return axios.get(`${base}/user/listpage`, { params: params }); };
 

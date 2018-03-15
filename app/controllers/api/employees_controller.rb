@@ -27,8 +27,6 @@ class Api::EmployeesController < ApplicationController
                   memo: @employee.memo ,
                   skill_categories:categories } 
     
-    # 
-    # render json:{:employee=>@employee, :status => 200}, include: ['user','talents','skill']
   end
 
   # 編集 指定idの社員情報を検索して、画面側にrender
@@ -41,23 +39,34 @@ class Api::EmployeesController < ApplicationController
   # PATCH/PUT /employees/1
   # PATCH/PUT /employees/1.json
   def update
-    #タレント情報の一括削除、タレントの一括更新
-    @employee_update = @employee.update(employee_params)
-    Talent.destroy(user_id: @employee.user_id)
-    talents_params do |talent_param|
-      @talent = Talent.new(talent_param)
+    # 社員情報の取得
+    @employee_update_result = @employee.update(update_employee_params)
+    # タレントの一括削除
+    Talent.where(user_id: @employee.user_id).destroy_all
+    # タレントの登録
+    params[:skill_ids].each do |skill_id|
+      @talent = Talent.new(user_id: @employee.user_id, skill_id: skill_id, learning_level: 1)
       @talent.save
     end
+    render json:{status:200}
 
-    respond_to do |format|
-      if @employee_update
-        format.html { redirect_to api_employee_url(@employee), notice: '社員情報の更新に成功しました。' }
-        format.json { render :show, status: :ok}
-      else
-        format.html { render :edit }
-        format.json { render json: @employee.errors, status: :unprocessable_entity }
-      end
-    end
+    #タレント情報の一括削除、タレントの一括更新
+    #@employee_update = @employee.update(employee_params)
+    #Talent.destroy(user_id: @employee.user_id)
+    #talents_params do |talent_param|
+    #  @talent = Talent.new(talent_param)
+    #  @talent.save
+    #end
+
+    #respond_to do |format|
+    #  if @employee_update
+    #    format.html { redirect_to api_employee_url(@employee), notice: '社員情報の更新に成功しました。' }
+    #    format.json { render :show, status: :ok}
+    #  else
+    #    format.html { render :edit }
+    #    format.json { render json: @employee.errors, status: :unprocessable_entity }
+    #  end
+    #end
 
   end
 
@@ -71,6 +80,10 @@ class Api::EmployeesController < ApplicationController
     #社員パラメータ
     def employee_params
       params.require(:employee).permit(:employee_number, :name, :speciality, :memo)
+    end
+    
+    def update_employee_params
+      params.require(:employee).permit(:id,:speciality, :memo, :skill_ids=>[])
     end
     
     #タレントの配列パラメータ(内容もチェック)

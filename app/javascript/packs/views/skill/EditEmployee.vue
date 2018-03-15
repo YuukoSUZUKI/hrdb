@@ -18,7 +18,7 @@
 			<el-input
 			  type="textarea"
 			  :autosize="{ minRows: 2, maxRows: 4}"
-			  placeholder="メモ欄"
+			  placeholder="メモ欄です。ご自由にお使いください。"
 			  v-model="employee.memo">
 			</el-input>
 		</el-form-item>
@@ -52,14 +52,14 @@
     </el-checkbox-group>
 			
 		<el-form-item>
-			<el-button type="primary">更新</el-button>
+			<el-button type="primary" @click="handleUpdate">更新</el-button>
 			<el-button @click.native.prevent>キャンセル</el-button>
 		</el-form-item>
 	</el-form>
 </template>
 
 <script>
-	import { getSkillCategoryMap, createSkill, getEmployee} from '../../api/api';
+	import { getSkillCategoryMap, createSkill, getEmployee, updateEmployee} from '../../api/api';
 	
 	export default {
 		props: ['id' ],
@@ -81,6 +81,7 @@
 			}
 		},
 		mounted:function(){
+			this.loading = true;
 			var current = this;
 			// スキルカテゴリ・スキル全取得
 			getSkillCategoryMap().then(response => {
@@ -104,9 +105,11 @@
 				} else {
 					console.log(error);
 				}
-				this.loading = false;
+
 			});
 			this.load();
+			
+			this.loading = false;			
 		},
 		methods: {
 			onSubmit() {
@@ -176,18 +179,30 @@
 						this.loading = false;
 					});
         	
-        //  //TODO 重複チェックは追加時にサーバ側でやった方がいい
-        //  // 同カテゴリの既存タグと重複する場合はエラー
-        //  if (category.skills.findIndex(o => o.skill_name === inputValue) >= 0) {
-        //    this.$message.error('入力されたスキルはリストにあります。リストから選択ください。');
-        //  } else {
-        //    //タグ追加
-        //    category.items.push(inputValue);
-        //  }
         }
         category.input_visible = false;
         category.inputValue = '';
       } ,
+      // 社員情報更新
+      handleUpdate(){
+      	let para = {
+      		id : 1,
+      		speciality: this.employee.speciality,
+      		memo: this.employee.memo,
+      		skill_ids : this.employee.selectedSkills
+      	};
+      	updateEmployee(para).then(response => {
+						console.log(response.data);
+						
+					})
+					.catch(error => {
+						if (! error.response) {
+							console.log('error: network error.')
+						} else {
+							console.log(error);
+						}
+					});
+      },
 			
 			
 		}
