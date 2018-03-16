@@ -1,5 +1,5 @@
 <template>
-	<el-form ref="employee" :model="employee" label-width="80px" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
+	<el-form ref="employee" :model="employee" label-width="80px" v-loading="loading" @submit.prevent="onSubmit" style="margin:20px;width:60%;min-width:600px;">
 		<el-form-item label="社員番号">
 			{{employee.employee_number}}
 		</el-form-item>
@@ -65,6 +65,7 @@
 		props: ['id' ],
 		data() {
 			return {
+				loading: false,
 				employee: {
 					employee_number: '',
 					name:'',
@@ -193,7 +194,7 @@
       	};
       	updateEmployee(para).then(response => {
 						console.log(response.data);
-						
+						this.$message('社員情報を更新しました。');
 					})
 					.catch(error => {
 						if (! error.response) {

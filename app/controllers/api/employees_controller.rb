@@ -50,24 +50,6 @@ class Api::EmployeesController < ApplicationController
     end
     render json:{status:200}
 
-    #タレント情報の一括削除、タレントの一括更新
-    #@employee_update = @employee.update(employee_params)
-    #Talent.destroy(user_id: @employee.user_id)
-    #talents_params do |talent_param|
-    #  @talent = Talent.new(talent_param)
-    #  @talent.save
-    #end
-
-    #respond_to do |format|
-    #  if @employee_update
-    #    format.html { redirect_to api_employee_url(@employee), notice: '社員情報の更新に成功しました。' }
-    #    format.json { render :show, status: :ok}
-    #  else
-    #    format.html { render :edit }
-    #    format.json { render json: @employee.errors, status: :unprocessable_entity }
-    #  end
-    #end
-
   end
 
   private
