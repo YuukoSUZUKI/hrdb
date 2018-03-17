@@ -64,7 +64,7 @@
 		    <el-form-item label="氏名" prop="name" :label-width="formLabelWidth">
 		      <el-input v-model="detailform.name" auto-complete="off" clearable></el-input>
 		    </el-form-item>
-		    <el-form-item prop="selectedSkills" label-width="0px">
+		    <el-form-item prop="selectedSkills" label-width="0">
 				  <el-checkbox-group v-model="detailform.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
 			  	  <!-- スキルタグ -->
 			  	  <el-collapse >
@@ -198,8 +198,13 @@
       
       //検索条件クリア
       clearCondition(){
+        //フリーワードフォーム
         this.$refs['filtersForm'].resetFields();
-        this.$refs['detailform'].resetFields();
+        
+        //詳細検索ダイアログ表示前は undefined なので判定
+        if ( this.$refs['detailform'] ) {
+          this.$refs['detailform'].resetFields();
+        }
       },
 			
 			//行選択
@@ -209,8 +214,6 @@
         
         this.dialogDetailVisible = true ;
         this.selectedEmployeeId = row.employee_id ;
-        // this.$router.push({ path: '/employeeDetail', query: { id: row.employeeId }})
-        //this.$router.push({ path: '/sandbox', params: {id: row.employee.id}})
 			},
 		},
 		
