@@ -167,7 +167,6 @@
 
 			//スキルオートコンプリート候補取得
   		getCandidate(query) {
-	        if (query !== '') {
 	          this.isLoadingSearchWord = true;
 	          
             // スキルカテゴリ・スキル全取得
@@ -185,9 +184,6 @@
             	}
             	this.isLoadingSearchWord = false;
             })
-	        } else {
-	          this.SearchWordOptions = [];
-	        }
 	    },
       
       //詳細検索
