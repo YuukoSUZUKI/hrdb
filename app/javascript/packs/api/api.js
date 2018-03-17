@@ -14,6 +14,9 @@ let base = '';
 
 export const requestLogin = params => { return axios.post(`${base}/login`, params).then(res => res.data); };
 
+//スキル キーワード検索候補リスト
+export const getSkillSearchList = params => { return client.get(`${base}/api/skill/list`, { params: params }); };
+
 export const getUserList = params => { return axios.get(`${base}/user/list`, { params: params }); };
 
 export const getUserListTest = params => { return client.get(`${base}/api/user/list`, { params: params }); }; 

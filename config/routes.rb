@@ -16,5 +16,6 @@ Rails.application.routes.draw do
     resources :employees, only: [:show, :edit, :update, :create]
     
     get 'user/list', to: 'users#searchSimple', controller: 'users'
+    get 'skill/list', to: 'skills#wordMarches', controller: 'skills'
   end
 end

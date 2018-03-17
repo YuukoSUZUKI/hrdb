@@ -3,23 +3,34 @@
 
 		<!--ツール類-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true" :model="filters">
+			<el-form :inline="true" :model="filtersForm" ref="filtersForm">
 				<!-- 検索ボックス(オートコンプリート) -->
-				<el-form-item>
-					<el-autocomplete
-				      class="inline-input"
-				      v-model="filters.name"
-				      :fetch-suggestions="querySearch"
-				      placeholder="社員名"
-				      @select="handleSelect"
-				    >
-					</el-autocomplete>
+				<el-form-item prop="SearchWordValues">
+				  <el-select
+				    v-model="filtersForm.SearchWordValues"
+				    multiple
+				    filterable
+				    remote
+				    placeholder="スキルで検索"
+				    :remote-method="getCandidate"
+				    :loading="isLoadingSearchWord"
+				    class="keyword-box">
+				    <el-option
+				      v-for="item in SearchWordOptions"
+				      :key="item.id"
+				      :label="item.skill_name"
+				      :value="item.id">
+				    </el-option>
+				  </el-select>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" icon="el-icon-search" v-on:click="getUser(filters.name,'')">検索</el-button>
+					<el-button type="primary" icon="el-icon-search" v-on:click="getUser('',filtersForm.SearchWordValues)">検索</el-button>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="default" @click="dialogFormVisible = true" >詳細な条件で検索</el-button>
+					<el-button type="default" @click="dialogFormVisible = true" icon="el-icon-zoom-in" >詳細検索</el-button>
+				</el-form-item>
+				<el-form-item>
+					<el-button type="default" @click="clearCondition" icon="el-icon-circle-close-outline" >条件クリア</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -49,10 +60,11 @@
 
 		<!-- 詳細検索ダイアログ -->
 		<el-dialog title="スキル詳細検索" :visible.sync="dialogFormVisible" :center=true class="dialog-search" width="650px">
-		  <el-form :model="detailform" label-position="left">
-		    <el-form-item label="氏名" :label-width="formLabelWidth">
+		  <el-form :model="detailform" ref="detailform" label-position="left">
+		    <el-form-item label="氏名" prop="name" :label-width="formLabelWidth">
 		      <el-input v-model="detailform.name" auto-complete="off" clearable></el-input>
 		    </el-form-item>
+		    <el-form-item prop="selectedSkills" label-width="0px">
 				  <el-checkbox-group v-model="detailform.selectedSkills" size="small" text-color="#FFF" fill="#409EFF">
 			  	  <!-- スキルタグ -->
 			  	  <el-collapse >
@@ -66,6 +78,7 @@
 			        </el-collapse-item>
 			      </el-collapse>
 			    </el-checkbox-group>
+		    </el-form-item>
 
 		  </el-form>
 		  <span slot="footer" class="dialog-footer">
@@ -82,16 +95,20 @@
 	</section>
 </template>
 <script>
-	import { getUserListTest ,getSkillCategoryMap} from '../../api/api';
+	import { getUserListTest ,getSkillCategoryMap ,getSkillSearchList} from '../../api/api';
 	//個人詳細
 	import EmployeeDetailVue from './EmployeeDetail.vue'
 
 	export default {
 		data() {
 			return {
-				filters: {
-					name: ''
+			  //フリーワード検索
+				filtersForm: {
+					SearchWordValues: [],
 				},
+				SearchWordOptions:[],
+				isLoadingSearchWord:false,
+				//ユーザ一覧
 				loading: false,
 				users: [
 				],
@@ -106,16 +123,6 @@
         formLabelWidth: '120px',
         //アコーディオンとタグのデータ
         dynamicCategories: [],
-        /*
-	      dynamicCategories: [ {id:'1',catName:'言語', inputVisible:false ,inputValue:'' ,items:['java','C#','PHP','VB']},
-	                              {id:'2', catName:'フレームワーク', inputVisible:false ,inputValue:'' , items:['spring','struts2','cakePHP','.net','iBatis','dbflute']},
-	                              {id:'3', catName:'OS・DB・ミドルウェア', inputVisible:false ,inputValue:'' ,items:['Linux','Oracle','MySQL','postgresql','Apache','Tomcat','redis','memcached']},
-	                              {id:'4', catName:'業種', inputVisible:false ,inputValue:'' ,items:['人材紹介','保険代理店','小売','流通','不動産']},
-	                              {id:'5', catName:'ポジション', inputVisible:false ,inputValue:'' ,items:['PM','サブリーダー']},
-	                              {id:'6', catName:'フェーズ', inputVisible:false ,inputValue:'' ,items:['要件定義','基本設計(外部設計)','詳細設計(内部設計)','結合テスト','総合テスト']},
-	                              {id:'7', catName:'資格', inputVisible:false ,inputValue:'' ,items:['PMP','ITIL','Oracle Gold']},
-	                            ],
-				*/
 				//個人詳細ダイアログ表示状態
 				dialogDetailVisible: false ,
 				selectedEmployeeId:'',
@@ -134,19 +141,15 @@
 				} else {
 					console.log(error);
 				}
-				this.loading = false;
 			})
 		},
 		methods: {
 			//検索処理
-			getUser: function (name, skills) {
-				let para = {
-					name: name,
-					skills: skills
-				};
+			getUser: function (name,skills) {
 				this.loading = true;
 
-				getUserListTest(para).then(response => {
+        let param = {name: name , skills: skills };
+				getUserListTest(param).then(response => {
 					console.log(response.status);
 					console.log(response.data);
 					this.users = response.data.users;
@@ -162,31 +165,41 @@
 				})
 			},
 
-			//オートコンプリート関連
-			querySearch(queryString, cb) {
-        var links = this.links;
-        var results = queryString ? links.filter(this.createFilter(queryString)) : links;
-        // call callback function to return suggestions
-        cb(results);
-      },
-      createFilter(queryString) {
-        return (link) => {
-          return (link.value.toLowerCase().indexOf(queryString.toLowerCase()) === 0);
-        };
-      },
-      loadAll() {
-        return [
-         ];
-      },
-      handleSelect(item) {
-        console.log(item);
-      },
-			// /オートコンプリート関連
+			//スキルオートコンプリート候補取得
+  		getCandidate(query) {
+	        if (query !== '') {
+	          this.isLoadingSearchWord = true;
+	          
+            // スキルカテゴリ・スキル全取得
+            getSkillSearchList({skill_name:query}).then(response => {
+            	console.log(response.status);
+            	console.log(response.data);
+            	this.SearchWordOptions = response.data.skills;
+            	this.isLoadingSearchWord = false;
+            })
+            .catch(error => {
+            	if (! error.response) {
+            		console.log('error: network error.')
+            	} else {
+            		console.log(error);
+            	}
+            	this.isLoadingSearchWord = false;
+            })
+	        } else {
+	          this.SearchWordOptions = [];
+	        }
+	    },
       
       //詳細検索
       detailedSearch(){
       	this.dialogFormVisible = false;
       	this.getUser(this.detailform.name, this.detailform.selectedSkills);
+      },
+      
+      //検索条件クリア
+      clearCondition(){
+        this.$refs['filtersForm'].resetFields();
+        this.$refs['detailform'].resetFields();
       },
 			
 			//行選択
@@ -203,8 +216,6 @@
 		
 		mounted() {
 			this.getUser('','');
-			//オートコンプリート
-      this.links = this.loadAll();
 		},
 		// 個人詳細のコンポーネント登録(キャメルケースで登録する)
 		components: {EmployeeDetail: EmployeeDetailVue},
@@ -215,6 +226,10 @@
 </script>
 
 <style scoped lang="scss">
+
+.keyword-box {
+  width:300px;
+}
 
 .dialog-search {
 	form {
