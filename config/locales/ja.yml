@@ -1,0 +1,16 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      employee: 社員情報
+    attributes:
+      user:
+        account: アカウント
+        password: パスワード
+        authority: 権限
+        
+      employee:
+        employee_number: 社員番号
+        name: 氏名
+        speciality: 得意領域
+        memo: 備考
