@@ -95,15 +95,18 @@ class Api::UsersController < ApplicationController
   # PATCH/PUT /users/1
   # PATCH/PUT /users/1.json
   def update
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を更新しました。' }
-        format.json { render :show, status: :ok}
-      else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+
+    logger.debug(user_params)
+
+    # 社員情報の更新、紐づくemployeeも更新
+    if update_result = @user.update(user_params)
+      render json:{status:200}
+    else
+      # エラーの場合エラーステータスを返却
+      logger.debug(update_result)
+      render json:{status:409}
     end
+
   end
 
   # DELETE /users/1
@@ -125,7 +128,9 @@ class Api::UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:account, :password,:authority,  employee_attributes: [:employee_number, :name,:id,:_destroy])
+      params.permit(
+        :id, :account, :password, :authority,
+        employee_attributes: [:id,:name,:employee_number, :_destroy])
     end
     
     #検索用パラメータ

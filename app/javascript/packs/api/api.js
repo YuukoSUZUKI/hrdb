@@ -26,12 +26,18 @@ export const editEmployee = employee_id => {return client.get(`${base}/api/emplo
 export const createSkill = skill => {return client.post(`${base}/api/skills`, skill); };
 export const updateEmployee = employee => {return client.patch(`${base}/api/employees/` + employee.id, employee); }; 
 
-export const getUserListPage = params => { return axios.get(`${base}/user/listpage`, { params: params }); };
+// export const getUserListPage = params => { return axios.get(`${base}/user/listpage`, { params: params }); };
+export const getUserManageList = params => { return client.get(`${base}/api/users`, { params: params }); };
+
+//ユーザ管理＞ユーザ一覧
+export const getUser = user_id => {return client.get(`${base}/api/users/` + user_id); }; 
 
 export const removeUser = params => { return axios.get(`${base}/user/remove`, { params: params }); };
 
 export const batchRemoveUser = params => { return axios.get(`${base}/user/batchremove`, { params: params }); };
 
-export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
+//ユーザ編集
+export const editUser = user => { return client.patch(`${base}/api/users/`+ user.id , user); };
+// export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
 
 export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };
