@@ -3,11 +3,13 @@ class Api::UsersController < ApplicationController
   skip_before_action :verify_authenticity_token   #MEMOこれを入れて本当に良い？
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
+  # ユーザ管理
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
-    render json:{:users=>@users, :status => 200}, include: 'employee'
+    # 氏名 部分一致検索の一覧
+    @users = User.has_employee_name_like(search_params[:name])
+    render json:{:users => @users, :status => 200}, include: 'employee'
   end
 
   # GET /users/1
@@ -15,11 +17,8 @@ class Api::UsersController < ApplicationController
   def show
   end
   
+  # スキルシート検索
   #GET /user/list
-  # def searchSimple
-  #   @users = User.has_employee_name_like(search_params[:name])
-  #   render json:{:users => @users, :status => 200}, include: 'employee'
-  # end
   def searchSimple
     # TODO ファットコントローラー、SQL直書き力技 時間あればいい方法に置き換える
     # SQL直書きの恩恵もあるかも(sql関数大文字小文字吸収・列横断のあいまい検索の要件に対応)
@@ -90,8 +89,6 @@ class Api::UsersController < ApplicationController
       # エラーの場合、エラーメッセージのリストとエラーステータスを返却
       render json:{ errors: @user.errors.full_messages } ,status: :unprocessable_entity
     end
-
-
   end
 
   # PATCH/PUT /users/1
@@ -99,7 +96,6 @@ class Api::UsersController < ApplicationController
   def update
 
     logger.debug(user_params)
-
     # 社員情報の更新、紐づくemployeeも更新
     @user.update(user_params)
     if @user.valid?

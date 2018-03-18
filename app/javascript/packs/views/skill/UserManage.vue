@@ -2,15 +2,15 @@
 	<section>
 		<!--検索エリア-->
 		<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
-			<el-form :inline="true" :model="filters">
+			<el-form :inline="true" :model="filters" @submit.native.prevent="getUsers">
 				<el-form-item>
 					<el-input v-model="filters.name" placeholder="氏名"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getUsers" icon="el-icon-search" plain>検索</el-button>
+					<el-button type="primary" @click="getUsers" icon="el-icon-search" >検索</el-button>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="handleAdd" icon="el-icon-plus">新規登録</el-button>
+					<el-button type="primary" @click="handleAdd" icon="el-icon-plus" plain>新規登録</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
