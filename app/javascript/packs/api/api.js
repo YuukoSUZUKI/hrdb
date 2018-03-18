@@ -39,5 +39,6 @@ export const batchRemoveUser = params => { return axios.get(`${base}/user/batchr
 //ユーザ編集
 export const editUser = user => { return client.patch(`${base}/api/users/`+ user.id , user); };
 // export const editUser = params => { return axios.get(`${base}/user/edit`, { params: params }); };
-
-export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };
+//ユーザ新規登録
+export const addUser = user => { return client.post(`${base}/api/users`, user); };
+// export const addUser = params => { return axios.get(`${base}/user/add`, { params: params }); };

@@ -7,10 +7,10 @@
 					<el-input v-model="filters.name" placeholder="氏名"></el-input>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" v-on:click="getUsers">検索</el-button>
+					<el-button type="primary" v-on:click="getUsers" icon="el-icon-search" plain>検索</el-button>
 				</el-form-item>
 				<el-form-item>
-					<el-button type="primary" @click="handleAdd">新規登録</el-button>
+					<el-button type="primary" @click="handleAdd" icon="el-icon-plus">新規登録</el-button>
 				</el-form-item>
 			</el-form>
 		</el-col>
@@ -28,7 +28,7 @@
 			
 			<el-table-column label="操作" width="150">
 				<template scope="scope">
-					<el-button size="small" @click="handleEdit(scope.$index, scope.row)">編集</el-button>
+					<el-button size="small" @click="handleEdit(scope.$index, scope.row)" icon="el-icon-edit">編集</el-button>
 					<!--<el-button type="danger" size="small" @click="handleDel(scope.$index, scope.row)">削除</el-button>-->
 				</template>
 			</el-table-column>
@@ -44,7 +44,7 @@
 		-->
 
 		<!--編集エリア-->
-		<el-dialog title="編集" :visible.sync="editFormVisible" :close-on-click-modal="false">
+		<el-dialog title="ユーザ編集" :visible.sync="editFormVisible" :close-on-click-modal="false">
 			<el-form :model="editForm" label-width="120px" :rules="editFormRules" ref="editForm" v-loading="editLoading">
 				<el-form-item label="氏名" prop="name">
 					<el-input v-model="editForm.name" auto-complete="off"></el-input>
@@ -58,38 +58,19 @@
 				<el-form-item label="パスワード" prop="password">
 					<el-input v-model="editForm.password" auto-complete="off"></el-input>
 				</el-form-item>
-				<el-form-item label="権限">
+				<el-form-item label="権限" prop="authority">
 					<el-radio-group v-model="editForm.authority">
-						<el-radio class="radio" :label="2">一般</el-radio>
-						<el-radio class="radio" :label="1">マネージャー</el-radio>
+						<el-radio class="radio" :label="2" border>一般</el-radio>
+						<el-radio class="radio" :label="1" border>マネージャー</el-radio>
 					</el-radio-group>
 				</el-form-item>
 			</el-form>
 			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="editFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="editSubmit">更新</el-button>
+				<el-button @click.native="editFormVisible = false">キャンセル</el-button>
+				<el-button type="primary" @click.native="handleSubmit" icon="el-icon-check">更新</el-button>
 			</div>
 		</el-dialog>
 
-		<!--新規登録エリア-->
-		<el-dialog title="新規登録" :visible.sync="addFormVisible" :center=true :close-on-click-modal="false">
-			<el-form :model="addForm" label-width="80px" :rules="addFormRules" ref="addForm">
-				<el-form-item label="氏名" prop="name">
-					<el-input v-model="addForm.name" auto-complete="off"></el-input>
-				</el-form-item>
-				<el-form-item label="権限">
-					<el-radio-group v-model="addForm.authority">
-						<el-radio class="radio" :label="2">一般</el-radio>
-						<el-radio class="radio" :label="1">マネージャー</el-radio>
-					</el-radio-group>
-				</el-form-item>
-			</el-form>
-			<div slot="footer" class="dialog-footer">
-				<el-button @click.native="addFormVisible = false">取消</el-button>
-				<el-button type="primary" @click.native="addSubmit" :loading="addLoading">更新</el-button>
-			</div>
-		</el-dialog>
-		
 	</section>
 </template>
 
@@ -97,6 +78,12 @@
 	import util from '../../common/js/util'
 	//import NProgress from 'nprogress'
 	import { getUserManageList,getUser, removeUser,editUser, addUser } from '../../api/api';
+	
+	//編集画面の状態
+	let EDIT_MODE = {
+		NEW:1,
+		UPDATE:2,		
+	}
 	export default {
 		data() {
 			return {
@@ -107,6 +94,7 @@
 				total: 0,
 				page: 1,
 				listLoading: false,
+				editMode:EDIT_MODE.NEW,
 				editFormVisible: false,//編集エリア表示/非表示
 				editLoading: false,
 				//編集フォームのバリデーションルール
@@ -115,6 +103,7 @@
 						{ required: true, trigger: 'blur',whitespace:true , message: '必ず入力してください'}
 					],
 					employee_number: [
+						{ required: true, trigger: 'blur' , message: '必ず入力してください'},
 						{ type:'number',min:1, max: 9999, trigger: 'blur' ,message: '半角数字4桁以内で入力してください',  }
 					],
 					account: [
@@ -125,6 +114,9 @@
 						{ required: true, trigger: 'blur' ,whitespace:true ,message: '必ず入力してください'},
 						{ pattern:/^[a-zA-Z0-9!-/:-@¥[-`{-~]+$/ ,trigger: 'blur' ,message: '半角英数記号で入力してください'},
 					],
+					authority: [
+						{ required: true, trigger: 'blur', message: '必ず入力してください'}
+					],
 				},
 				//編集エリア
 				editForm: {
@@ -133,7 +125,7 @@
 					employee_number: '',
 					account: '',
 					password: '',
-					authority: -1,
+					authority: null,
 					employee_id:null,
 				},
 				addFormVisible: false,//新規エリア表示/非表示
@@ -197,8 +189,11 @@
 			},
 			//編集画面を表示する
 			handleEdit: function (index, row) {
+				this.editMode = EDIT_MODE.UPDATE ;
 				this.editFormVisible = true;
-				this.editLoading = true;
+				this.editLoading = true; //ローディングアイコン
+				//編集時はパスワード非必須(入力時のみパスワード更新)
+				this.editFormRules.password[0].required = false ;
 
         let vueInstance = this ;
 				getUser(row.id).then((res) => {
@@ -208,8 +203,9 @@
 					vueInstance.editForm.name = user.employee.name;
 					vueInstance.editForm.employee_number = user.employee.employee_number;
 					vueInstance.editForm.account = user.account;
+					//パスワードは表示しない
 					vueInstance.editForm.authority = user.authority;
-					vueInstance.editForm.employee_id = user.employee.id;
+					vueInstance.editForm.employee_id = user.employee.id; //updateに主キーが必要となる
 					//NProgress.done();
 					this.editLoading = false;
 				});
@@ -218,24 +214,28 @@
 			//追加画面を表示する
 			handleAdd: function () {
 				console.log('handleAdd')
-				this.editForm = {
-					id: null,
-					name: '',
-					employee_number: '',
-					account: '',
-					password: '',
-					authority: -1,
-					employee_id:null,
-					
-				}
+				this.editMode = EDIT_MODE.NEW ;
+				//フォーム表示
 				this.editFormVisible = true;
+				//新規登録時はパスワード必須
+				this.editFormRules.password[0].required = true ;
+				
+				//フォーム初期化($nextTickでダイアログ表示のDOMがレンダリングされてから)
+        this.$nextTick(_ => {
+					this.$refs['editForm'].resetFields(); 
+        });
 
-				// this.addFormVisible = true;
-				// this.addForm = {
-				// 	name: '',
-				// 	authority: -1,
-				// 	password: ''
-				// };
+
+			},
+			//フォーム更新ボタン
+			handleSubmit: function() {
+				if (this.editMode == EDIT_MODE.NEW) {
+					//新規登録処理
+					this.addSubmit();
+				} else {
+					//編集処理
+					this.editSubmit();
+				}
 			},
 			//編集送信
 			editSubmit: function () {
@@ -266,16 +266,18 @@
 											this.$message.success('社員情報を更新しました。');
 											
 											//フォームを閉じる
+											this.$refs['editForm'].resetFields(); //フォーム初期化
 											this.editFormVisible = false;
 											//一覧を再取得
 											this.getUsers();
 										})
 										.catch(error => {
-											this.$message.error('エラーが発生しました。');
-											if (! error.response) {
-												console.log('error: network error.')
+											if (error.response && error.response.data && error.response.data.errors) {
+												//レスポンスにエラーメッセージがある場合、それを表示
+												let msg = error.response.data.errors.join('、')
+												this.$message.error(msg);
 											} else {
-												console.log(error);
+												this.$message.error('エラーが発生しました。');
 											}
 											this.editLoading = false;
 										});
@@ -288,23 +290,41 @@
 			},
 			//新規追加
 			addSubmit: function () {
-				this.$refs.addForm.validate((valid) => {
+				this.$refs.editForm.validate((valid) => {
 					if (valid) {
 						this.$confirm('登録しますか？', '確認', {}).then(() => {
-							this.addLoading = true;
-							//NProgress.start();
-							let para = Object.assign({}, this.addForm);
+							
+							this.editLoading = true;
+							
+							//新規追加する
+			      	let para = {
+			      		account : this.editForm.account,
+			      		password: this.editForm.password,
+			      		authority: this.editForm.authority,
+			      		//employeeテーブルをaccepts_nested_attributes_forで更新するので入れ子の形
+			      		employee_attributes: {name: this.editForm.name,
+			      														employee_number: this.editForm.employee_number,
+			      													}
+			      	};
+							
 							addUser(para).then((res) => {
-								this.addLoading = false;
-								//NProgress.done();
-								this.$message({
-									message: '登録成功',
-									type: 'success'
-								});
-								this.$refs['addForm'].resetFields();
-								this.addFormVisible = false;
+								this.$message.success('社員情報を登録しました。');
+								this.$refs['editForm'].resetFields(); //フォーム初期化
+								this.editLoading = false;
+								this.editFormVisible = false ; //フォームを閉じる
+								//一覧を更新
 								this.getUsers();
+							}).catch(error => {
+								if (error.response && error.response.data && error.response.data.errors) {
+									//レスポンスにエラーメッセージがある場合、それを表示
+									let msg = error.response.data.errors.join('、')
+									this.$message.error(msg);
+								} else {
+									this.$message.error('エラーが発生しました。');
+								}
+								this.editLoading = false;
 							});
+							
 						});
 					}
 				});

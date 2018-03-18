@@ -78,17 +78,19 @@ class Api::UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    logger.debug(user_params)
+    #userと紐づくemployeeを新規作成
     @user = User.new(user_params)
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to api_user_url(@user), notice: 'ユーザ情報を作成しました' }
-        format.json { render :show, status: :created }
-      else
-        format.html { render :new }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
+    @user.save
+
+    if @user.valid?
+      render json:{ user: @user, status:200 }
+    else
+      logger.debug(@user.errors.full_messages)
+      # エラーの場合、エラーメッセージのリストとエラーステータスを返却
+      render json:{ errors: @user.errors.full_messages } ,status: :unprocessable_entity
     end
-    
+
 
   end
 
@@ -99,12 +101,13 @@ class Api::UsersController < ApplicationController
     logger.debug(user_params)
 
     # 社員情報の更新、紐づくemployeeも更新
-    if update_result = @user.update(user_params)
+    @user.update(user_params)
+    if @user.valid?
       render json:{status:200}
     else
-      # エラーの場合エラーステータスを返却
-      logger.debug(update_result)
-      render json:{status:409}
+      logger.debug(@user.errors.full_messages)
+      # エラーの場合、エラーメッセージのリストとエラーステータスを返却
+      render json:{ errors: @user.errors.full_messages } ,status: :unprocessable_entity
     end
 
   end
