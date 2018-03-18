@@ -108,7 +108,7 @@
       handleOpen:function(){
         this.loading = true; //ローディングアイコン
         //employee_idをキーに個人詳細情報を取得
-        var vueInstance = this ;
+        let vueInstance = this ;
 				getEmployee(this.employee_id).then(response => {
 				  //APIの結果を画面にセット
 					vueInstance.name = response.data.name;
