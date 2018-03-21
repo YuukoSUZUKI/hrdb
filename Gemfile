@@ -65,7 +65,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # webpack用
 #gem 'foreman'
 
-# 暗号化
+# パスワード暗号化 has_secure_password を使うため
 gem 'bcrypt','~> 3.1.7'
 
 #DBテストデータ用

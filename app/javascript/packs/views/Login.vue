@@ -1,17 +1,17 @@
 <template>
   <div class="login-background">
-    <el-form :model="ruleForm2" :rules="rules2" ref="ruleForm2" label-position="left" label-width="0px" class="demo-ruleForm login-container">
+    <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="0px" class="demo-ruleForm login-container">
       <div class="title"><i class="el-icon-search"></i>meru
         <span class="subtitle">“クメル”で才能を検索</span>
       </div>
       <el-form-item prop="account">
-        <el-input type="text" v-model="ruleForm2.account" auto-complete="off" placeholder="アカウント"></el-input>
+        <el-input type="text" v-model="ruleForm.account" auto-complete="off" placeholder="アカウント" clearable></el-input>
       </el-form-item>
       <el-form-item prop="checkPass">
-        <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off" placeholder="パスワード"></el-input>
+        <el-input type="password" v-model="ruleForm.checkPass" auto-complete="off" placeholder="パスワード" clearable></el-input>
       </el-form-item>
       <el-form-item style="width:100%;">
-        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit2" :loading="logining">ログイン</el-button>
+        <el-button type="primary" style="width:100%;" @click.native.prevent="handleSubmit" :loading="logining">ログイン</el-button>
       </el-form-item>
     </el-form>
   </div>
@@ -19,57 +19,54 @@
 
 <script>
   import { requestLogin } from '../api/api';
-  //import NProgress from 'nprogress'
   export default {
     data() {
       return {
         logining: false,
-        ruleForm2: {
-          account: 'admin',
-          checkPass: '123456'
+        ruleForm: {
+          account: 'h-katou',
+          checkPass: 'password'
         },
-        rules2: {
+        rules: {
           account: [
             { required: true, message: 'アカウントを入力してください', trigger: 'blur' },
-            //{ validator: validaePass }
           ],
           checkPass: [
             { required: true, message: 'パスワードを入力してください', trigger: 'blur' },
-            //{ validator: validaePass2 }
           ]
         },
       };
     },
     methods: {
-      handleReset2() {
-        this.$refs.ruleForm2.resetFields();
-      },
-      handleSubmit2(ev) {
+      handleSubmit(ev) {
         var _this = this;
-        this.$refs.ruleForm2.validate((valid) => {
-          if (valid) {
-            //_this.$router.replace('/table');
-            this.logining = true;
-            //NProgress.start();
-            var loginParams = { username: this.ruleForm2.account, password: this.ruleForm2.checkPass };
-            requestLogin(loginParams).then(data => {
-              this.logining = false;
-              //NProgress.done();
-              let { msg, code, user } = data;
-              if (code !== 200) {
-                this.$message({
-                  message: msg,
-                  type: 'error'
-                });
-              } else {
-                sessionStorage.setItem('user', JSON.stringify(user));
-                this.$router.push({ path: '/user' });
-              }
-            });
-          } else {
-            console.log('error submit!!');
+        this.$refs.ruleForm.validate((valid) => {
+          if (! valid) {
+            //バリデーションエラー
+						this.$message.error('入力してください。');
             return false;
           }
+            
+            this.logining = true;
+            var loginParams = { account: this.ruleForm.account, password: this.ruleForm.checkPass };
+            requestLogin(loginParams).then(data => {
+              this.logining = false;
+              //生成された認証トークンを保持
+              sessionStorage.setItem('AUTH_TOKEN', JSON.stringify(data.token));
+              //スキル検索に遷移
+              this.$router.push({ path: '/user' });
+            })
+            .catch(error => {
+              console.log(error);
+							if (error.response && error.response.data && error.response.data.errors) {
+								//レスポンスにエラーメッセージがある場合、それを表示
+								let msg = error.response.data.errors.join('、')
+								this.$message.error(msg);
+							} else {
+								this.$message.error('エラーが発生しました。');
+							}
+							this.logining = false;
+						});
         });
       }
     }

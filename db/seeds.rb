@@ -90,11 +90,11 @@ Skill.create!([
   {skill_name: "Oracle Certified Java Programmer, Gold SE 8", has_learning_level: false, skill_category_id: 7}
 ])
 User.create!([
-  {id:1, account: "h-katou", authority: 1, token: "1", password: "password"},
-  {id:2, account: "yu-suzuki", authority: 2, token: "2", password: "password"},
-  {id:3, account: "y-yamashita", authority: 1, token: "3", password: "password"},
-  {id:4, account: "t-gotou", authority: 1, token: "4", password: "password"},
-  {id:5, account: "m-yokoyama", authority: 2, token: "5", password: "password"}
+  {id:1, account: "h-katou", authority: 1, token: "1", password: BCrypt::Password.create('password') },
+  {id:2, account: "yu-suzuki", authority: 2, token: "2", password: BCrypt::Password.create('password')},
+  {id:3, account: "y-yamashita", authority: 1, token: "3", password: BCrypt::Password.create('password')},
+  {id:4, account: "t-gotou", authority: 1, token: "4", password: BCrypt::Password.create('password')},
+  {id:5, account: "m-yokoyama", authority: 2, token: "5", password: BCrypt::Password.create('password')}
 ])
 Employee.create!([
   {employee_number: 100, name: "加藤太郎", birthday: "1980-01-01", speciality: "javaのWEB開発", memo: "最近眼精疲労", user_id: 1},

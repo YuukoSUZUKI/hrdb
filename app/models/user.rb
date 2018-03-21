@@ -1,6 +1,7 @@
 class User < ApplicationRecord
 
   has_secure_token
+  has_secure_password
   
   has_one :employee
   accepts_nested_attributes_for :employee, allow_destroy: true 

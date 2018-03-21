@@ -20,6 +20,7 @@ class Api::UsersController < ApplicationController
   # スキルシート検索
   #GET /user/list
   def searchSimple
+
     # TODO ファットコントローラー、SQL直書き力技 時間あればいい方法に置き換える
     # SQL直書きの恩恵もあるかも(sql関数大文字小文字吸収・列横断のあいまい検索の要件に対応)
     sql = "SELECT employees.*,

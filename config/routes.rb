@@ -15,7 +15,10 @@ Rails.application.routes.draw do
     resources :user_details, only: [:show, :edit, :update]
     resources :employees, only: [:show, :edit, :update, :create]
     
+    post 'login/login'
+    #スキル検索
     get 'user/list', to: 'users#searchSimple', controller: 'users'
+    #スキルオートコンプリート
     get 'skill/list', to: 'skills#wordMarches', controller: 'skills'
   end
 end

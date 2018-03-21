@@ -17,7 +17,6 @@ import routes from './router'
 import Mock from './mock'
 Mock.bootstrap();
 
-
 Vue.use(ElementUI, {locale})
 
 Vue.use(VueRouter)
@@ -37,9 +36,9 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   //NProgress.start();
   if (to.path == '/login') {
-    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('AUTH_TOKEN');
   }
-  let user = JSON.parse(sessionStorage.getItem('user'));
+  let user = JSON.parse(sessionStorage.getItem('AUTH_TOKEN'));
   if (!user && to.path != '/login') {
     next({ path: '/login' })
   } else {
