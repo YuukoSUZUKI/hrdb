@@ -19,7 +19,8 @@ class ApplicationController < ActionController::Base
     authenticate_or_request_with_http_token do |token, options|
       @login_user=User.find_by(token:token)
       #トークンが存在して有効期間内なら認証OK
-      @login_user != nil && DateTime.now <= @login_user.token_expire ? true : false
+      # @login_user != nil && DateTime.now <= @login_user.token_expire ? true : false
+      @login_user != nil  ? true : false
     end
   end
   
