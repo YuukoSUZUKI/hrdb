@@ -25,7 +25,7 @@ let base = '';
   }, function (error) {
     // 認証エラー時の処理
     if (error.response.status === 401) {
-      alert('セッションエラー、ログインし直してください。');
+        alert('セッションエラー、ログインし直してください。');
     // システムエラー時の処理
     } else if (error.response.status === 500) {
       alert('システムエラー、ネットワークを確認してください。');
