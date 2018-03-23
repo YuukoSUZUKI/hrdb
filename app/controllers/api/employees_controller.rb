@@ -1,7 +1,15 @@
 #社員情報
 class Api::EmployeesController < ApplicationController
-  skip_before_action :verify_authenticity_token   #MEMOこれを入れて本当に良い？
+  skip_before_action :verify_authenticity_token   #API利用なのでCSRFトークンチェックをスキップ
   before_action :set_employee, only: [:show, :edit, :update]
+  
+  #ログインユーザの情報を表示
+  def showMe
+    # ユーザIDをログインユーザから取得しshowを実行する (リクエストパラメータの上書きは良くないのでリファクタ対象 )
+    params[:id] = @login_user.employee.id
+    set_employee
+    show
+  end
 
   # 一覧表示
   # GET /employees/1
@@ -21,7 +29,8 @@ class Api::EmployeesController < ApplicationController
       categories.push(item)
     end    
     
-    render json:{ employee_number: @employee.employee_number,
+    render json:{ id: @employee.id,
+                  employee_number: @employee.employee_number,
                   name: @employee.name, 
                   speciality: @employee.speciality, 
                   memo: @employee.memo ,

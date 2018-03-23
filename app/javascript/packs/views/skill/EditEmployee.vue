@@ -30,10 +30,9 @@
         <el-collapse-item v-for="(skill_category,key,index) in dynamicCategories" 
             :key="skill_category.id" :name="skill_category.id" :title="skill_category.skill_category_name">
           
-          <el-checkbox :key="skill.id" v-for="skill in skill_category.skills" :label="skill.id" :name="skill.skill_name"  border>
+         <el-checkbox :key="skill.id" v-for="skill in skill_category.skills" :label="skill.id" :name="skill.skill_name"  border>
           	{{skill.skill_name}}
           </el-checkbox>
-
           <el-input
             class="input-new-tag"
             v-show="skill_category.input_visible"
@@ -67,6 +66,7 @@
 			return {
 				loading: false,
 				employee: {
+					id:null,
 					employee_number: '',
 					name:'',
 					specialty: '',
@@ -118,8 +118,10 @@
 			},
 			load(){
 				var current = this;
-				getEmployee(1).then(response => {
+				//ログインユーザ自身のスキルシート情報を取得する
+				getEmployee('me').then(response => {
 				  //APIの結果を画面にセット
+				  this.employee.id = response.data.id;
 					this.employee.name = response.data.name;
 					this.employee.employee_number = response.data.employee_number;
 					this.employee.speciality = response.data.speciality;
@@ -187,14 +189,14 @@
       // 社員情報更新
       handleUpdate(){
       	let para = {
-      		id : 1,
+      		id : this.employee.id,
       		speciality: this.employee.speciality,
       		memo: this.employee.memo,
       		skill_ids : this.employee.selectedSkills
       	};
       	updateEmployee(para).then(response => {
 						console.log(response.data);
-						this.$message('社員情報を更新しました。');
+						this.$message.success('社員情報を更新しました。');
 					})
 					.catch(error => {
 						if (! error.response) {
@@ -210,3 +212,41 @@
 	}
 
 </script>
+
+
+<style>
+/* 基本情報カードのスタイル */
+  .item {
+    margin-bottom: 18px;
+  }
+
+  .clearfix:before,
+  .clearfix:after {
+    display: table;
+    content: "";
+  }
+  .clearfix:after {
+    clear: both
+  }
+
+  .box-card {
+    width: 480px;
+  }
+
+/* タグのスタイル */
+  .el-tag + .el-tag {
+    margin-left: 10px;
+  }
+  .button-new-tag {
+    margin-left: 10px;
+    height: 32px;
+    line-height: 30px;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .input-new-tag {
+    width: 90px;
+    margin-left: 10px;
+    vertical-align: bottom;
+  }
+</style>
