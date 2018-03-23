@@ -51,22 +51,22 @@
             var loginParams = { account: this.ruleForm.account, password: this.ruleForm.checkPass };
             requestLogin(loginParams).then(data => {
               this.logining = false;
-              //生成された認証トークンを保持
-              sessionStorage.setItem('AUTH_TOKEN', JSON.stringify(data.token));
-              //スキル検索に遷移
-              this.$router.push({ path: '/user' });
-            })
-            .catch(error => {
-              console.log(error);
-							if (error.response && error.response.data && error.response.data.errors) {
+              //IDパスワード不一致
+							if (data && data.errors) {
 								//レスポンスにエラーメッセージがある場合、それを表示
-								let msg = error.response.data.errors.join('、')
+								let msg = data.errors.join('、')
 								this.$message.error(msg);
-							} else {
-								this.$message.error('エラーが発生しました。');
-							}
-							this.logining = false;
+              } else {
+                //生成された認証トークンを保持
+                sessionStorage.setItem('AUTH_TOKEN', JSON.stringify(data.token));
+                //スキル検索に遷移
+                this.$router.push({ path: '/user' });
+              }
+              
+            }).catch(error => {
+							this.logining = false; //ローディングを戻す
 						});
+
         });
       }
     }

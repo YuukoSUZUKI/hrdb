@@ -11,13 +11,7 @@ class Api::LoginController < ApplicationController
     logger.debug(login_params)
     #ユーザーの存在とパスワードの照合
     login_user = User.find_by(account:login_params[:account])
-    
-    logger.debug(login_params[:password])
-    logger.debug(login_user.authenticate('password') == false)
-    logger.debug(login_user.authenticate('password') )
-    # TODO authenticate が期待通り動かない・・・
     if login_user != nil && login_user.authenticate(login_params[:password])
-    # if login_user != nil 
       #ログインに成功したらトークンの生成 とトークン有効期間の設定
       login_user.regenerate_token
       login_user.token_expire = DateTime.now + Rational(1, 24)  # トークン有効期間 1時間
@@ -25,7 +19,7 @@ class Api::LoginController < ApplicationController
       render json:{token: login_user.token, status:200}
     else
       # ログインエラー ステータスを返却
-      render json:{ errors: ["アカウント・パスワードが一致しません"] } ,status: :unauthorized
+      render json:{ errors: ["アカウント・パスワードが一致しません"] ,status:401}
     end
   end
 

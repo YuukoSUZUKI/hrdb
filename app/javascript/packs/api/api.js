@@ -25,10 +25,12 @@ let base = '';
   }, function (error) {
     // 認証エラー時の処理
     if (error.response.status === 401) {
-        alert('セッションエラー、ログインし直してください。');
+      alert('セッションエラー、ログインし直してください。');
+      //認証トークンクリア
+      sessionStorage.removeItem('AUTH_TOKEN');
     // システムエラー時の処理
-    } else if (error.response.status === 500) {
-      alert('システムエラー、ネットワークを確認してください。');
+    } else if (error.response.status >= 500) {
+      alert('システムエラー、ネットワークを確認してください。解消しない場合は管理者へ連絡ください。');
     }
     return Promise.reject(error)
   });
